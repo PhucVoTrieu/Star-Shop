@@ -1,4 +1,4 @@
-package com.eyewear.entities;
+package com.starshop.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,11 +25,11 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OrderDetail> items;
 
-    @Column(name = "order_at", nullable = false)
-    private LocalDateTime orderAt;
+    @Column(name = "order_date", nullable = false)
+    private LocalDateTime orderDate;
 
     @Column(name = "total_price", nullable = false)
-    private float totalPrice;
+    private double totalPrice;
 
     @Column(name = "payment_method", nullable = false)
     private String paymentMethod;

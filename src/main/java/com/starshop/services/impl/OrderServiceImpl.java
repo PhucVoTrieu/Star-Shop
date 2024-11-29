@@ -1,13 +1,14 @@
-package com.eyewear.services.impl;
+package com.starshop.services.impl;
 
-import com.eyewear.entities.Order;
-import com.eyewear.entities.OrderDetail;
-import com.eyewear.repositories.OrderDetailRepository;
-import com.eyewear.repositories.OrderRepository;
-import com.eyewear.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.starshop.entities.Order;
+import com.starshop.entities.OrderDetail;
+import com.starshop.repositories.OrderDetailRepository;
+import com.starshop.repositories.OrderRepository;
+import com.starshop.services.OrderService;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,16 +22,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderDetailRepository orderDetailRepository;
-    @Override
-    public List<Order> getOrdersByBuyer(Long buyerId) {
-        return orderRepository.findAllByBuyerId(buyerId);
-    }
-
-    @Override
-    public Order getOrderDetail(Long orderId, Long buyerId) {
-        return orderRepository.findOrderDetailByIdAndBuyerId(orderId, buyerId)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
-    }
+    
     @Override
     public void placeOrder(Order order) {
         // Lưu đơn hàng trước
@@ -60,10 +52,6 @@ public class OrderServiceImpl implements OrderService {
 		return "loi";
 	}
 
-	@Override
-	public List<Order> getAllOrdersSortByDate() {
-	    return orderRepository.findAllByOrderByOrderAtDesc();
-	}
 
 	@Override
 	public void updateOrderStatus(Long orderId, String newStatus) {

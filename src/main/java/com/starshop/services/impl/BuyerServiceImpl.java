@@ -1,13 +1,13 @@
-package com.eyewear.services.impl;
+package com.starshop.services.impl;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.eyewear.entities.Buyer;
-import com.eyewear.repositories.BuyerRepository;
-import com.eyewear.services.BuyerService;
+import com.starshop.entities.Buyer;
+import com.starshop.repositories.BuyerRepository;
+import com.starshop.services.BuyerService;
 
 @Service
 public class BuyerServiceImpl implements BuyerService{

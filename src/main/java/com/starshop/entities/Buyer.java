@@ -1,4 +1,4 @@
-package com.eyewear.entities;
+package com.starshop.entities;
 
 import java.util.List;
 
@@ -41,5 +41,10 @@ public class Buyer {
 
     @OneToOne(mappedBy = "buyer", cascade = CascadeType.ALL, orphanRemoval = true)
     private ShoppingCart shoppingCart; // Một Buyer có một ShoppingCart
-  
+    
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Address> addresses;
+
+    @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
+    private List<Favorite> favorites;
 }

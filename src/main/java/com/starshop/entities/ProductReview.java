@@ -1,4 +1,4 @@
-package com.eyewear.entities;
+package com.starshop.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "productReview")
+@Table(name = "productReviews")
 public class ProductReview implements Serializable{
 	/**
 	 * 

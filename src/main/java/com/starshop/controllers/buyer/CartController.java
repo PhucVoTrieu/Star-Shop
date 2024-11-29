@@ -1,8 +1,9 @@
-package com.eyewear.controllers.buyer;
+package com.starshop.controllers.buyer;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,16 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.eyewear.DTO.CartItemDTO;
-import com.eyewear.entities.Buyer;
-import com.eyewear.entities.CartItem;
-import com.eyewear.entities.Product;
-import com.eyewear.entities.ShoppingCart;
-import com.eyewear.services.BuyerService;
-import com.eyewear.services.CartService;
-import com.eyewear.services.ProductService;
-import com.eyewear.services.impl.CartServiceImpl;
-import com.eyewear.services.impl.ProductServiceImpl;
+import com.starshop.DTO.CartItemDTO;
+import com.starshop.entities.Buyer;
+import com.starshop.entities.CartItem;
+import com.starshop.entities.Product;
+import com.starshop.entities.ShoppingCart;
+import com.starshop.services.BuyerService;
+import com.starshop.services.CartService;
+import com.starshop.services.ProductService;
+import com.starshop.services.impl.CartServiceImpl;
+import com.starshop.services.impl.ProductServiceImpl;
 
 @RequestMapping("/buyer/cart")
 @Controller
@@ -90,7 +91,7 @@ public class CartController {
 	@GetMapping("/addCartItem")
 	public String addCartItem(@RequestParam("productID") Long productId, Model model,RedirectAttributes redirectAttributes) {
 		// Tìm sản phẩm dựa trên ID
-		Product product = productService.findById(productId);
+		Optional<Product> product = productService.findById(productId);
 		Buyer buyer = buyerService.findById(1L).orElseThrow(() -> new RuntimeException("Buyer not found"));
 		if (product != null) {
 			

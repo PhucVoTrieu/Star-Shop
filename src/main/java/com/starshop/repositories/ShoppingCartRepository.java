@@ -1,12 +1,12 @@
-package com.eyewear.repositories;
+package com.starshop.repositories;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.eyewear.entities.Buyer;
-import com.eyewear.entities.ShoppingCart;
+import com.starshop.entities.Buyer;
+import com.starshop.entities.ShoppingCart;
 
 
 @Repository

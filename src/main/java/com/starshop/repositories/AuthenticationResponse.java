@@ -1,4 +1,4 @@
-package com.eyewear.repositories;
+package com.starshop.repositories;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;

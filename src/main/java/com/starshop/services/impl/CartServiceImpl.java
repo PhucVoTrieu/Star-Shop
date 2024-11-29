@@ -1,4 +1,4 @@
-package com.eyewear.services.impl;
+package com.starshop.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,14 +9,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.eyewear.entities.Buyer;
-import com.eyewear.entities.CartItem;
-import com.eyewear.entities.Product;
-import com.eyewear.entities.ShoppingCart;
-import com.eyewear.repositories.CartItemRepository;
-import com.eyewear.repositories.ProductRepository;
-import com.eyewear.repositories.ShoppingCartRepository;
-import com.eyewear.services.CartService;
+import com.starshop.entities.Buyer;
+import com.starshop.entities.CartItem;
+import com.starshop.entities.Product;
+import com.starshop.entities.ShoppingCart;
+import com.starshop.repositories.CartItemRepository;
+import com.starshop.repositories.ProductRepository;
+import com.starshop.repositories.ShoppingCartRepository;
+import com.starshop.services.CartService;
 
 @Service
 public class CartServiceImpl implements CartService {

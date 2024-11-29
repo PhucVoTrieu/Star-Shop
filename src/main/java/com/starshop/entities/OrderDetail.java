@@ -1,4 +1,4 @@
-package com.eyewear.entities;
+package com.starshop.entities;
 
 
 import jakarta.persistence.Column;

@@ -1,9 +1,8 @@
-package com.eyewear.DTO;
+package com.starshop.DTO;
 
 import java.util.List;
 
-import com.eyewear.entities.BranchProduct;
-import com.eyewear.model.ProductModel;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

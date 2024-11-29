@@ -1,4 +1,4 @@
-package com.eyewear.model;
+package com.starshop.model;
 
 public class ResetPasswordRequest {
     private String password;

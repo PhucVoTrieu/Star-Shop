@@ -1,4 +1,4 @@
-package com.eyewear.DTO.request;
+package com.starshop.DTO.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.*;

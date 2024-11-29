@@ -1,10 +1,11 @@
-package com.eyewear.services.impl;
+package com.starshop.services.impl;
 
-import com.eyewear.services.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+
+import com.starshop.services.EmailService;
 
 @Service
 public class EmailServiceImpl implements EmailService {

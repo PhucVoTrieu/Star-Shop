@@ -1,4 +1,4 @@
-package com.eyewear.configs;
+package com.starshop.configs;
 
 import lombok.Builder;
 import org.springframework.context.annotation.Bean;

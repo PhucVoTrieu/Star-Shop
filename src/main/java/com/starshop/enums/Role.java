@@ -1,4 +1,4 @@
-package com.eyewear.enums;
+package com.starshop.enums;
 
 public enum Role {
     ADMIN,

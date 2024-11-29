@@ -1,4 +1,4 @@
-package com.eyewear.entities;
+package com.starshop.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "ShoppingCart")
+@Table(name = "shoppingCarts")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -1,4 +1,4 @@
-package com.eyewear.controllers.manager;
+package com.starshop.controllers.manager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.eyewear.entities.Order;
-import com.eyewear.services.OrderService;
+import com.starshop.entities.Order;
+import com.starshop.services.OrderService;
 
 import java.util.List;
 
@@ -21,8 +21,7 @@ public class OrderManagementController {
     // Hiển thị danh sách đơn hàng
     @GetMapping("")
     public String getOrderList(Model model) {
-        List<Order> orders = orderService.getAllOrdersSortByDate();
-        model.addAttribute("orders", orders);
+
         return "manager/order-list";
     }
     

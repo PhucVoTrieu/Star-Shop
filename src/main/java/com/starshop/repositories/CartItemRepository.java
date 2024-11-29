@@ -1,4 +1,4 @@
-package com.eyewear.repositories;
+package com.starshop.repositories;
 
 import java.util.Optional;
 
@@ -9,9 +9,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.eyewear.entities.CartItem;
-import com.eyewear.entities.Product;
-import com.eyewear.entities.ShoppingCart;
+import com.starshop.entities.CartItem;
+import com.starshop.entities.Product;
+import com.starshop.entities.ShoppingCart;
 
 
 @Repository

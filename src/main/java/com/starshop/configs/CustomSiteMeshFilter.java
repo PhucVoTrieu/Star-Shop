@@ -1,4 +1,4 @@
-package com.eyewear.configs;
+package com.starshop.configs;
 
 import org.sitemesh.builder.SiteMeshFilterBuilder;
 import org.sitemesh.config.ConfigurableSiteMeshFilter;

@@ -1,4 +1,4 @@
-package com.eyewear.services;
+package com.starshop.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,11 +7,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.eyewear.entities.Buyer;
-import com.eyewear.entities.CartItem;
-import com.eyewear.entities.Product;
-import com.eyewear.entities.ShoppingCart;
-import com.eyewear.repositories.CartItemRepository;
+import com.starshop.entities.Buyer;
+import com.starshop.entities.CartItem;
+import com.starshop.entities.Product;
+import com.starshop.entities.ShoppingCart;
+import com.starshop.repositories.CartItemRepository;
 
 public interface CartService {
 

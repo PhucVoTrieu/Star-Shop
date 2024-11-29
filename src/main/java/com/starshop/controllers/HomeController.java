@@ -1,4 +1,4 @@
-package com.eyewear.controllers;
+package com.starshop.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

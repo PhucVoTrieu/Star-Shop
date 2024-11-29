@@ -1,4 +1,4 @@
-package com.eyewear.services;
+package com.starshop.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.eyewear.entities.ProductReview;
+import com.starshop.entities.ProductReview;
 
 
 public interface ProductReviewService {

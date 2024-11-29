@@ -1,4 +1,4 @@
-package com.eyewear.utils;
+package com.starshop.utils;
 
 public class Constant {
 

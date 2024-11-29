@@ -1,4 +1,4 @@
-package com.eyewear.services.impl;
+package com.starshop.services.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,10 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.eyewear.entities.Product;
-import com.eyewear.entities.ProductReview;
-import com.eyewear.repositories.ProductReviewRepository;
-import com.eyewear.services.ProductReviewService;
+import com.starshop.entities.Product;
+import com.starshop.entities.ProductReview;
+import com.starshop.repositories.ProductReviewRepository;
+import com.starshop.services.ProductReviewService;
 
 @Service
 public class ProductReviewServiceImpl implements ProductReviewService {

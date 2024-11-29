@@ -1,4 +1,4 @@
-package com.eyewear.controllers.manager;
+package com.starshop.controllers.manager;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

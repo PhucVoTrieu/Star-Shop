@@ -8,12 +8,12 @@
 		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.eyewear</groupId>
-	<artifactId>EyewearECM</artifactId>
+	<groupId>com.starshop</groupId>
+	<artifactId>StarShop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>EyewearECM</name>
-	<description>Spring boot web project - Eyewear e-commerce</description>
+	<name>StarShop</name>
+	<description>Spring boot web project - Star SHop e-commerce</description>
 	<url/>
 	<licenses>
 		<license/>

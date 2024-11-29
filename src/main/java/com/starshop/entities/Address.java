@@ -1,7 +1,7 @@
 
-package com.eyewear.entities;
+package com.starshop.entities;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,9 +24,13 @@ public class Address {
 	
 	private String district;
 	
-	private String commue;
+	private String commune;
 	
 	private String streetName;
 	
 	private int streetNumber;
+	
+	@ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private Buyer buyer;
 }

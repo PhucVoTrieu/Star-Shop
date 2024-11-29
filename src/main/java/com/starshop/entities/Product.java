@@ -1,4 +1,4 @@
-package com.eyewear.entities;
+package com.starshop.entities;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,50 +18,38 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)  // Sử dụng Single Table Inheritance
-@DiscriminatorColumn(name = "product_type", discriminatorType = DiscriminatorType.STRING)  // Cột phân biệt loại sản phẩm
 @Table(name = "products", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
-	
-	@Column(length=100, nullable = false)
+
+	@Column(length = 100, nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private double price;
-	
+
 	private String description;
-	
-	private String brand;
-		
-	private String image; // đường dẫn đến Cloudinary
-	
-	@Column(nullable=true)
-	private Float height;
-	
-	@Column(nullable=true)
-	private Float width;
-	
-	//không cần lưu trữ vào cơ sở dữ liệu
-	@Transient
-    private String imageUrl; // URL to be generated
+
+	private Integer stock; // Số lượng hoa còn trong kho
+	private String imageUrl; // Hình ảnh hoa (URL của ảnh hoặc dữ liệu ảnh)
+
+	private String color; // Màu sắc của hoa
+	private String size; // Kích thước (nếu có, như hoa nhỏ, trung bình, lớn)
+
+	@Column(name = "is_published", nullable = false)
+	private Boolean isPublished = true; // Mặc định là công khai
 
 	@ManyToOne
-	@JoinColumn(name = "category_id")  //khóa ngoại "category_id"
-    private Category category;
-	
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BranchProduct> branches;
-	
-	@Transient
-	public List<BranchProduct> getAvailBranches() {
-		return branches.stream()
-                .filter(branchProduct -> branchProduct.getQuantity() > 0)
-                .collect(Collectors.toList());
-	}
-	
-}
+	@JoinColumn(name = "category_id") // khóa ngoại "category_id"
+	private Category category;
 
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<ProductReview> reviews; // Đánh giá sản phẩm
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	private List<Favorite> favorites; // Sản phẩm yêu thích
+
+}

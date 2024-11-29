@@ -1,8 +1,8 @@
-package com.eyewear.services;
+package com.starshop.services;
 
 import java.util.Optional;
 
-import com.eyewear.entities.Buyer;
+import com.starshop.entities.Buyer;
 
 public interface BuyerService {
 

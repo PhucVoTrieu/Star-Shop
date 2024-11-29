@@ -1,4 +1,4 @@
-package com.eyewear.exceptions;
+package com.starshop.exceptions;
 
 import lombok.AccessLevel;
 import lombok.Data;

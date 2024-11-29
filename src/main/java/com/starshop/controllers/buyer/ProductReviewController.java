@@ -1,4 +1,4 @@
-package com.eyewear.controllers.buyer;
+package com.starshop.controllers.buyer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.eyewear.entities.Buyer;
-import com.eyewear.entities.Product;
-import com.eyewear.entities.ProductReview;
-import com.eyewear.services.ProductReviewService;
-import com.eyewear.services.ProductService;
+import com.starshop.entities.Buyer;
+import com.starshop.entities.Product;
+import com.starshop.entities.ProductReview;
+import com.starshop.services.ProductReviewService;
+import com.starshop.services.ProductService;
 
 import jakarta.validation.Valid;
 
@@ -41,13 +41,13 @@ public class ProductReviewController {
 	@GetMapping("")
 	public String review( @RequestParam("buyerId") Long buyerID, @RequestParam("productId") Long productId, Model model) {
 	    model.addAttribute("buyerId", buyerID);
-	    Product product = productService.findById(productId);
+	    Optional<Product> product = productService.findById(productId);
 	    model.addAttribute("product", product);
 	    return "/buyer/product-review";
 	}
 	@GetMapping("/editReview")
 	public String edit(@RequestParam("buyerId") Long buyerId, @RequestParam("productId") Long productId, Model model) {
-		Product product = productService.findById(productId);
+		Optional<Product> product = productService.findById(productId);
 		Optional<ProductReview> review = reivewService.getReviewByBuyerAndProduct(buyerId, productId);
         
         if (review.isPresent()) {

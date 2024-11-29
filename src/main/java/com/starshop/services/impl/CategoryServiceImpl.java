@@ -1,14 +1,13 @@
-package com.eyewear.services.impl;
+package com.starshop.services.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.eyewear.entities.Category;
-import com.eyewear.repositories.CategoryRepository;
-
-import com.eyewear.services.CategoryService;
+import com.starshop.entities.Category;
+import com.starshop.repositories.CategoryRepository;
+import com.starshop.services.CategoryService;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 	

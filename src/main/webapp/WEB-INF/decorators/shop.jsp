@@ -6,138 +6,41 @@
 <html>
 <!-- HEAD START -->
 <head>
-	<meta charset="UTF-8">
+	 <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title><sitemesh:write property="title"/></title>
-	<link rel="shortcut icon" href="favicon.ico">
-	<!-- Fonts START -->
-  <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|PT+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
-  <!-- Fonts END -->
+	 <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
 
-  <!-- Global styles START -->          
-  <link href="/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Global styles END --> 
-   
-  <!-- Page level plugin styles START -->
-  <link href="/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
-  <link href="/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet">
-  <link href="/global/plugins/slider-revolution-slider/rs-plugin/css/settings.css" rel="stylesheet">
-  <link href="/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css">
-  <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
-  <link href="/global/plugins/rateit/src/rateit.css" rel="stylesheet" type="text/css">
-  <!-- Page level plugin styles END -->
+    <!-- CSS
+	============================================ -->
 
-	<!-- Page level plugin styles -->
-  <link href="/frontend/pages/css/style-shop.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"> -->
 
-  <!-- Theme styles START -->
-  <link href="/global/css/components.css" rel="stylesheet">
-  <link href="/frontend/layout/css/style.css" rel="stylesheet">
-  <link href="/frontend/pages/css/style-shop.css" rel="stylesheet" type="text/css">
-  <link href="/frontend/pages/css/style-revolution-slider.css" rel="stylesheet"><!-- metronic revo slider styles -->
-  <link href="/frontend/layout/css/style-responsive.css" rel="stylesheet">
-  <link href="/frontend/layout/css/themes/red.css" rel="stylesheet" id="style-color">
-  <link href="/frontend/layout/css/custom.css" rel="stylesheet">
-  <!-- Theme styles END -->
+    <!-- Icon Font CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/vendor/plazaicon.css">
+    <link rel="stylesheet" href="assets/css/vendor/themify-icons.css">
+    <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css"> -->
+
+    <!-- Plugins CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/plugins/animate.css">
+    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/select2.min.css"> -->
+
+    <!-- Helper CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/helper.css"> -->
+
+    <!-- Main Style CSS -->
+    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
 
 
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Bootstrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<style>
-.flash-message {
-    position: fixed; /* Vị trí cố định trên màn hình */
-    top: 50%; /* Căn giữa theo trục dọc */
-    left: 50%; /* Căn giữa theo trục ngang */
-    transform: translate(-50%, -50%); /* Đẩy về trung tâm */
-    z-index: 1050; /* Hiển thị trên các thành phần khác */
-    width: 60%; /* Chiều ngang của thông báo */
-    max-width: 600px; /* Giới hạn chiều ngang tối đa */
-    padding: 20px; /* Khoảng cách bên trong */
-    text-align: center; /* Căn giữa nội dung */
-    background-color: rgba(255, 255, 255, 0.9); /* Nền trắng mờ */
-    border-radius: 10px; /* Bo góc */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng */
-    font-size: 1.5rem; /* Kích thước chữ */
-    animation: fade-in-out 2s forwards; /* Hiệu ứng xuất hiện và biến mất */
-}
-
-.alert {
-    margin: 0; /* Đảm bảo không có khoảng cách thừa */
-    padding: 20px; /* Khoảng cách bên trong thông báo */
-}
-
-@keyframes fade-in-out {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, calc(-50% - 20px)); /* Xuất hiện từ trên */
-    }
-    10% {
-        opacity: 1;
-        transform: translate(-50%, -50%); /* Giữ vị trí chính giữa */
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-        transform: translate(-50%, calc(-50% - 20px)); /* Biến mất lên trên */
-    }
-}
-
-
-
-
-
-
-/* Spinner Group Styles */
-.spinner {
-    width: 120px; /* Giới hạn chiều rộng */
-    display: inline-flex;
-    align-items: center;
-}
-
-.spinner .btn {
-    width: 30px; /* Giới hạn kích thước nút */
-    height: 30px;
-    line-height: 1; /* Căn chỉnh nội dung */
-    padding: 0;
-    font-size: 14px; /* Kích thước chữ nhỏ */
-    border-radius: 0; /* Xóa bo góc nếu cần */
-}
-
-.spinner input {
-    width: 50px; /* Kích thước của input */
-    height: 30px;
-    text-align: center;
-    font-size: 14px; /* Chữ vừa phải */
-    padding: 0;
-    margin: 0;
-    border: 1px solid #ccc; /* Viền mỏng */
-    border-left: none; /* Xóa viền giữa nút trái */
-    border-right: none; /* Xóa viền giữa nút phải */
-}
-
-.spinner input:focus {
-    outline: none; /* Xóa đường viền focus */
-    box-shadow: none; /* Xóa hiệu ứng shadow khi focus */
-}
-
-.spinner .btn:first-child {
-    border-top-left-radius: 4px; /* Bo góc trái */
-    border-bottom-left-radius: 4px;
-}
-
-.spinner .btn:last-child {
-    border-top-right-radius: 4px; /* Bo góc phải */
-    border-bottom-right-radius: 4px;
-}
-
-</style>
-
-
+    <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
+    <link rel="stylesheet" href="assets/css/plugins-min/plugins.min.css">
+    <link rel="stylesheet" href="assets/css/style.min.css">
 
 </head>
 <!-- Head END -->

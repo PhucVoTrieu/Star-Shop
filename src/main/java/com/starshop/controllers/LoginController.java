@@ -1,4 +1,4 @@
-package com.eyewear.controllers;
+package com.starshop.controllers;
 
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
