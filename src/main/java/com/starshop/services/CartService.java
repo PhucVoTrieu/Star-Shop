@@ -49,6 +49,8 @@ public interface CartService {
 
 	int updateQuantity(Long cartItemId, int quantity);
 
+	void deleteByShoppingCart(ShoppingCart cart);
+
 	
 	
 }

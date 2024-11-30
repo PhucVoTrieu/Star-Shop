@@ -23,4 +23,8 @@ public interface CartItemRepository extends JpaRepository<CartItem, Long> {
     @Transactional
     @Query(value = "UPDATE cart_items SET quantity = :quantity WHERE id = :cartItemId", nativeQuery = true)
     int updateQuantity(@Param("cartItemId") Long cartItemId, @Param("quantity") int quantity);
+    
+    @Transactional
+    void deleteByShoppingCart(ShoppingCart cart); // Xóa tất cả các CartItem liên kết với giỏ hàng
+
 }

@@ -1,4 +1,4 @@
-package com.starshop.controllers.common;
+package com.starshop.controllers.buyer;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,8 +25,8 @@ import com.starshop.services.CategoryService;
 import com.starshop.services.ProductService;
 
 @Controller
-@RequestMapping("/common/products")
-public class ProductController {
+@RequestMapping("/buyer/products")
+public class BuyerProductController {
 
     @Autowired
     private ProductService productService;

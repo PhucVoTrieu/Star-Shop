@@ -31,6 +31,11 @@ public class ProductServiceImpl implements ProductService {
 	public Optional<Product> findById(Long id) {
 		return productRepo.findById(id);
 	}
+
+	@Override
+	public List<Product> findTopByOrderByCreatedDateDesc(Pageable pageable) {
+		return productRepo.findTopByOrderByCreatedDateDesc(pageable);
+	}
 	
 	
 	

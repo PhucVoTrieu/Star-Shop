@@ -33,6 +33,11 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
+	public void deleteByShoppingCart(ShoppingCart cart) {
+		cartItemRepository.deleteByShoppingCart(cart);
+	}
+
+	@Override
 	public int updateQuantity(Long cartItemId, int quantity) {
 		return cartItemRepository.updateQuantity(cartItemId, quantity);
 	}

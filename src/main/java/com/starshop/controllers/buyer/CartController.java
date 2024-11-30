@@ -1,6 +1,7 @@
 package com.starshop.controllers.buyer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.starshop.DTO.CartItemDTO;
@@ -46,8 +48,11 @@ public class CartController {
 			throw new RuntimeException("cartID is required");
 		}
 		ShoppingCart cart = cartService.findByCartId(cartid).orElseThrow(() -> new RuntimeException("cart not found"));
+		model.addAttribute("cartID", cartid); // Truyền cartID vào model
 		List<CartItem> cartItems = cart.getCartItems();
-
+		if(cartItems.size()==0) {
+			return "buyer/empty-cart";
+		}
 		model.addAttribute("listCartItem", cartItems);
 		return "buyer/cart";
 	}
@@ -74,7 +79,7 @@ public class CartController {
 //	}
 
 	@GetMapping("/deleteCartItem")
-	public String deleteCart(Model model, @RequestParam("cartItemID") Long cartItemId,
+	public String deleteCartItem(Model model, @RequestParam("cartItemID") Long cartItemId,
 			RedirectAttributes redirectAttributes) {
 		CartItem cartItem = cartService.findById(cartItemId)
 				.orElseThrow(() -> new RuntimeException("cartItem not found"));
@@ -87,23 +92,57 @@ public class CartController {
 		// Redirect đến URL /buyer/cart
 		return "redirect:/buyer/cart?cartID=" + cart.getCartId();
 	}
+	@GetMapping("/deleteAllCartItems")
+	public String deleteAllCartItem(Model model, @RequestParam("cartID") Long cartId,
+			RedirectAttributes redirectAttributes) {
+		ShoppingCart cart = cartService.findByCartId(cartId)
+				.orElseThrow(() -> new RuntimeException("ShoppingCart not found"));
+		
+		cartService.deleteByShoppingCart(cart);
+		
 
-	@GetMapping("/addCartItem")
-	public String addCartItem(@RequestParam("productID") Long productId, Model model,RedirectAttributes redirectAttributes) {
-		// Tìm sản phẩm dựa trên ID
-		Optional<Product> product = productService.findById(productId);
-		Buyer buyer = buyerService.findById(1L).orElseThrow(() -> new RuntimeException("Buyer not found"));
-		if (product != null) {
-			
-			// Thêm sản phẩm vào giỏ hàng
-			cartService.addCartItem(buyer, productId, 1);
-			redirectAttributes.addFlashAttribute("successMessage", "Thêm vật phẩm thành công!");
-		} else {
-			// model.addAttribute("error", "Product not found!");
-			  redirectAttributes.addFlashAttribute("errorMessage", "Sản phẩm không tìm thấy!");
-		}
+		redirectAttributes.addFlashAttribute("message", "Xóa vật phẩm thành công!");
 
-		//return "redirect:/buyer/cart?cartID="+ buyer.getShoppingCart().getCartId();
-		return "redirect:/common/products";
+	
+		return "redirect:/buyer/cart?cartID=" + cartId;
 	}
+//	@GetMapping("/addCartItem")
+//	public String addCartItem(@RequestParam("productID") Long productId, Model model,RedirectAttributes redirectAttributes) {
+//		// Tìm sản phẩm dựa trên ID
+//		Optional<Product> product = productService.findById(productId);
+//		Buyer buyer = buyerService.findById(1L).orElseThrow(() -> new RuntimeException("Buyer not found"));
+//		if (product != null) {
+//			
+//			// Thêm sản phẩm vào giỏ hàng
+//			cartService.addCartItem(buyer, productId, 1);
+//			redirectAttributes.addFlashAttribute("successMessage", "Thêm vật phẩm thành công!");
+//		} else {
+//			// model.addAttribute("error", "Product not found!");
+//			  redirectAttributes.addFlashAttribute("errorMessage", "Sản phẩm không tìm thấy!");
+//		}
+//
+//		//return "redirect:/buyer/cart?cartID="+ buyer.getShoppingCart().getCartId();
+//		return "redirect:/buyer/products";
+//	}
+	@GetMapping("/addCartItem")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> addCartItem(@RequestParam("productID") Long productId) {
+	    Map<String, Object> response = new HashMap<>();
+	    Optional<Product> product = productService.findById(productId);
+	    Buyer buyer = buyerService.findById(1L).orElseThrow(() -> new RuntimeException("Buyer not found"));
+
+	    if (product.isPresent()) {
+	        // Thêm sản phẩm vào giỏ hàng
+	        cartService.addCartItem(buyer, productId, 1);
+
+	        response.put("cartItemCount", buyer.getShoppingCart().getCartItems().size()); // Số lượng item trong giỏ hàng
+	    } else {
+	        response.put("success", false);
+	        response.put("message", "Sản phẩm không tồn tại!");
+	    }
+	    
+	    return ResponseEntity.ok(response);
+	}
+
+
 }

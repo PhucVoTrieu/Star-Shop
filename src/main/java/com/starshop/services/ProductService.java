@@ -18,6 +18,8 @@ public interface ProductService {
 
 	Optional<Product> findById(Long id);
 
+	List<Product> findTopByOrderByCreatedDateDesc(Pageable pageable);
+
 
 	
 }

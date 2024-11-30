@@ -16,10 +16,14 @@ import com.starshop.entities.Product;
 
 import jakarta.validation.Valid;
 
-@Repository 
-public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product>{
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
-	    @Query("SELECT p FROM Product p WHERE p.isPublished = true")
-	    List<Product> findAllPublished();
+	@Query("SELECT p FROM Product p WHERE p.isPublished = true")
+	List<Product> findAllPublished();
+
+	// Lấy sản phẩm mới nhất
+	@Query("SELECT p FROM Product p ORDER BY p.createdDate DESC")
+	List<Product> findTopByOrderByCreatedDateDesc(Pageable pageable);
 
 }
