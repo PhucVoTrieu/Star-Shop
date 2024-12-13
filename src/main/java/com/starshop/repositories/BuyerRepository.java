@@ -7,5 +7,5 @@ import com.starshop.entities.Buyer;
 
 @Repository
 public interface BuyerRepository extends JpaRepository<Buyer, Long>{
-	
+	Buyer findBuyerByEmail(String email);
 }

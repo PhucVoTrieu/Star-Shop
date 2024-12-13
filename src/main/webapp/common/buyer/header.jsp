@@ -116,7 +116,7 @@
                                         <a href="#" role="button" data-bs-toggle="dropdown"><i class="icon-users"></i></a>
 
                                         <ul class="dropdown-menu ">
-                                            <li><a href="#">My Account</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/buyer/account">My Account</a></li>
                                             <li><a href="#" id="logoutLink">Logout</a></li>
 
 

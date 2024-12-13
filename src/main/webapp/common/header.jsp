@@ -117,7 +117,7 @@
 
                                         <ul class="dropdown-menu ">
                                             <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
-                                            <li><a id="logoutButton" href="${pageContext.request.contextPath}/auth/logout">Logout</a></li>
+
 
                                         </ul>
                                     </div>

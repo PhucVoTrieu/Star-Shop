@@ -8,4 +8,6 @@ public interface BuyerService {
 
 	Optional<Buyer> findById(Long id);
 
+	Buyer findBuyerByEmail(String email);
+
 }

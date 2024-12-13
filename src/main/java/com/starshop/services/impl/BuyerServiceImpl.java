@@ -17,6 +17,11 @@ public class BuyerServiceImpl implements BuyerService{
 	@Override
 	public Optional<Buyer> findById(Long id) {
 		return buyerRepository.findById(id);
+	}
+
+	@Override
+	public Buyer findBuyerByEmail(String email) {
+		return buyerRepository.findBuyerByEmail(email);
 	} 
 	
 }

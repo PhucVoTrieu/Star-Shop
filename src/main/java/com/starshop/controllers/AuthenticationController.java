@@ -71,7 +71,7 @@ public class AuthenticationController {
 	            .maxAge(0)  // Hết hạn ngay lập tức
 	            .path("/")  // Áp dụng cho toàn bộ ứng dụng
 	            .build();
-
+	    
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
 	    return ResponseEntity.noContent().headers(headers).build();
