@@ -9,7 +9,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-2">
                             <div class="header-logo">
-                                <a href="index.html"><img src="assets/images/logo/logo.png" alt=""></a>
+                                <a href="index.html"><img src="assets/images/flower/logo-removebg-preview.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-lg-7 position-static">
@@ -116,11 +116,9 @@
                                         <a href="#" role="button" data-bs-toggle="dropdown"><i class="icon-users"></i></a>
 
                                         <ul class="dropdown-menu ">
-                                            <li><a href="#">Delivery</a></li>
-                                            <li><a href="#">Legal Notice</a></li>
-                                            <li><a href="#">Secure payment</a></li>
-                                            <li><a href="#">Sitemap</a></li>
-                                            <li><a href="#">About us</a></li>
+                                            <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                                            <li><a id="logoutButton" href="${pageContext.request.contextPath}/auth/logout">Logout</a></li>
+
                                         </ul>
                                     </div>
                                     <div class="header-account-list dropdown mini-cart">
@@ -130,53 +128,33 @@
                                         </a>
 
                                         <ul class="dropdown-menu ">
-                                            <li class="product-cart">
-                                                <div class="single-cart-box">
-                                                    <div class="cart-img">
-                                                        <a href="shop-single.html"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
-                                                        <span class="pro-quantity">1x</span>
-                                                    </div>
-                                                    <div class="cart-content">
-                                                        <h6 class="title"><a href="shop-single.html">Rock Soapwort</a></h6>
-                                                        <div class="cart-price">
-                                                            <span class="sale-price">$70.00</span>
-                                                            <span class="regular-price">$80.00</span>
-                                                        </div>
-                                                    </div>
-                                                    <a href="javascript:void(0);" class="del-icon"><i class="fa fa-trash"></i></a>
-                                                </div>
-                                                <div class="single-cart-box">
-                                                    <div class="cart-img">
-                                                        <a href="shop-single.html"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
-                                                        <span class="pro-quantity">1x</span>
-                                                    </div>
-                                                    <div class="cart-content">
-                                                        <h6 class="title"><a href="shop-single.html">Rock Soapwort</a></h6>
-                                                        <div class="cart-price">
-                                                            <span class="sale-price">$70.00</span>
-                                                            <span class="regular-price">$80.00</span>
-                                                        </div>
-                                                    </div>
-                                                    <a href="javascript:void(0);" class="del-icon"><i class="fa fa-trash"></i></a>
-                                                </div>
-                                                <div class="single-cart-box">
-                                                    <div class="cart-img">
-                                                        <a href="shop-single.html"><img src="assets/images/cart/cart-3.jpg" alt=""></a>
-                                                        <span class="pro-quantity">1x</span>
-                                                    </div>
-                                                    <div class="cart-content">
-                                                        <h6 class="title"><a href="shop-single.html">Rock Soapwort</a></h6>
-                                                        <div class="cart-price">
-                                                            <span class="sale-price">$70.00</span>
-                                                            <span class="regular-price">$80.00</span>
-                                                        </div>
-                                                    </div>
-                                                    <a href="javascript:void(0);" class="del-icon"><i class="fa fa-trash"></i></a>
-                                                </div>
-                                            </li>
+                                            <ul class="product-cart">
+                                            
+                                            <c:set var="subTotal" value="0.0" />
+    <!-- Duyệt qua các item trong giỏ hàng -->
+    <c:forEach var="item" items="${sessionScope.buyer.shoppingCart.cartItems}">
+        <li class="single-cart-box">
+            <div class="cart-img">
+                <a href="shop-single.html"><img src="${item.product.imageUrl}" alt="${item.product.name} "></a>
+                <span class="pro-quantity">${item.quantity}x</span>
+            </div>
+            <div class="cart-content">
+                <h6 class="title"><a href="shop-single.html">${item.product.name}</a></h6>
+                <div class="cart-price">
+                    <span class="sale-price" >$${item.product.price}</span>
+                    <span class="regular-price">$${item.product.price}</span>
+                </div>
+            </div>
+            <a href="javascript:void(0);" class="del-icon"><i class="fa fa-trash"></i></a>
+        </li>
+         <c:set var="subTotal" value="${subTotal + item.product.price * item.quantity}" />
+    </c:forEach>
+    
+           
+</ul>
                                             <li class="product-total">
                                                 <ul class="cart-total">
-                                                    <li> Total : <span>$189.00</span></li>
+                                                    <li> Sub Total : <span>$ ${subTotal}</span></li>
                                                 </ul>
                                             </li>
                                             <li class="product-btn">

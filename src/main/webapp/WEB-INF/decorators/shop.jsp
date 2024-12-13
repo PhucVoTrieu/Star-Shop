@@ -73,12 +73,12 @@
 <!-- Head END -->
 <body>
 	<div class="main-wrapper">
-		<%@include file="/common/header.jsp"%>
+		<%@include file="/common/buyer/header.jsp"%>
 
 		<sitemesh:write property="body" />
 
 		<div>
-			<%@include file="/common/footer.jsp"%>
+			<%@include file="/common/buyer/footer.jsp"%>
 		</div>
 	</div>
 <!-- Toast Notification -->
@@ -239,5 +239,33 @@ $(document).ready(function () {
             Layout.initSliderRange();
         });
     </script>
+    
+          <script>
+    document.getElementById("logoutLink").addEventListener("click", async function (e) {
+        e.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+
+        try {
+            const response = await fetch(`${pageContext.request.contextPath}/auth/logout`, {
+                method: 'POST',
+                credentials: 'include', // Gửi cookie JWT kèm theo request
+            });
+
+            if (response.ok) {
+                // Xóa JWT token khỏi trình duyệt (nếu cần)
+                document.cookie = "jwtToken=; path=/; max-age=0";
+
+                // Chuyển hướng về trang đăng nhập
+                window.location.href = `${pageContext.request.contextPath}/login`;
+            } else {
+                alert("Logout failed!");
+            }
+        } catch (error) {
+            console.error("Error during logout:", error);
+            alert("An error occurred during logout. Please try again.");
+        }
+    });
+</script>
+          
+    
 </body>
 </html>

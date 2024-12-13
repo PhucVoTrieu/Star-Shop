@@ -1,94 +1,55 @@
 package com.starshop.exceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AccountStatusException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.starshop.DTO.request.ApiResponse;
 
-@ControllerAdvice
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.security.SignatureException;
+
 public class GlobalExceptionHandler {
+	@ExceptionHandler(Exception.class)
+	public ProblemDetail handleSecurityException(Exception exception) {
+		ProblemDetail errorDetail = null;
+// TODO send this stack trace to an observability tool
+		exception.printStackTrace();
 
-//    @ExceptionHandler(value = Exception.class)
-//    ResponseEntity<ApiResponse> handleRuntimeException(RuntimeException e) {
-//        ApiResponse apiResponse = new ApiResponse();
-//
-//        apiResponse.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
-//        apiResponse.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
-//
-//        return  ResponseEntity.badRequest().body(apiResponse);
-//    }
-//
-//    @ExceptionHandler(value = AppException.class)
-//    ResponseEntity<ApiResponse> handleRuntimeException(AppException e) {
-//        ErrorCode errorCode = e.getErrorCode();
-//        ApiResponse apiResponse = new ApiResponse();
-//
-//        apiResponse.setCode(errorCode.getCode());
-//        apiResponse.setMessage(errorCode.getMessage());
-//
-//        return  ResponseEntity.badRequest().body(apiResponse);
-//    }
+		if (exception instanceof BadCredentialsException) {
+			errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(401), exception.getMessage());
+			errorDetail.setProperty("description", "The username or password is incorrect");
+			return errorDetail;
+		}
+		if (exception instanceof AccountStatusException) {
+			errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
+			errorDetail.setProperty("description", "The account is locked");
+		}
+		if (exception instanceof AccessDeniedException) {
+			errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
+			errorDetail.setProperty("description", "You are not authorized to access this resource");
+		}
+		if (exception instanceof SignatureException)
 
-    @ExceptionHandler(value = Exception.class)
-    ResponseEntity<ApiResponse> handleGenericException(Exception e) {
-        ApiResponse apiResponse = new ApiResponse();
-
-        apiResponse.setCode(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode());
-        apiResponse.setMessage(ErrorCode.UNCATEGORIZED_EXCEPTION.getMessage());
-
-        return ResponseEntity.badRequest().body(apiResponse);
-    }
-
-    @ExceptionHandler(value = AppException.class)
-    ResponseEntity<ApiResponse> handleAppException(AppException e) {
-        ErrorCode errorCode = e.getErrorCode();
-        ApiResponse apiResponse = new ApiResponse();
-
-        apiResponse.setCode(errorCode.getCode());
-        apiResponse.setMessage(errorCode.getMessage());
-
-        return ResponseEntity.badRequest().body(apiResponse);
-    }
-
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    ResponseEntity<ApiResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        String enumKey = e.getFieldError().getDefaultMessage();
-
-        ErrorCode errorCode = ErrorCode.INVALID_KEY;
-
-        try {
-            errorCode = ErrorCode.valueOf(enumKey);
-        } catch (IllegalArgumentException e1) {
-
-        }
-        ApiResponse apiResponse = new ApiResponse();
-
-        apiResponse.setCode(errorCode.getCode());
-        apiResponse.setMessage(errorCode.getMessage());
-
-        return ResponseEntity.badRequest().body(apiResponse);
-    }
-
-//    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-//    ResponseEntity<ApiResponse> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-//        String enumKey = e.getFieldError() != null ? e.getFieldError().getDefaultMessage() : "INVALID_KEY";
-//
-//        ErrorCode errorCode = ErrorCode.INVALID_KEY;
-//
-//        try {
-//            errorCode = ErrorCode.valueOf(enumKey);
-//        } catch (IllegalArgumentException e1) {
-//            // Log lỗi hoặc cung cấp thông tin chi tiết hơn
-//        }
-//
-//        ApiResponse apiResponse = new ApiResponse();
-//
-//        apiResponse.setCode(errorCode.getCode());
-//        apiResponse.setMessage(errorCode.getMessage());
-//
-//        return ResponseEntity.badRequest().body(apiResponse);
-//    }
+		{
+			errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
+			errorDetail.setProperty("description", "The JWT signature is invalid");
+		}
+		if (exception instanceof ExpiredJwtException) {
+			errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
+			errorDetail.setProperty("description", "The JWT token has expired");
+		}
+		if (errorDetail == null) {
+			errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), exception.getMessage());
+			errorDetail.setProperty("description", "Unknown internal server error.");
+		}
+		return errorDetail;
+	}
 }

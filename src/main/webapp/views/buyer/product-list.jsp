@@ -70,7 +70,7 @@
         <div class="single-product">
             <div class="product-image">
                 <a href="shop-single.html">
-                    <img src="${product.imageUrl}" src="assets/images/${product.imageUrl}" alt="${product.name}">
+                    <img src="${product.imageUrl}" alt="${product.name}">
                 </a>
 
                 <!-- Hiển thị sticker nếu sản phẩm hết hàng -->

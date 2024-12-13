@@ -25,7 +25,11 @@ public class ShoppingCart {
 	    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private List<CartItem> cartItems = new ArrayList<>();
 
+//	    @OneToOne
+//	    @JoinColumn(name = "buyer_id", nullable = false)
+//	    private Buyer buyer; // Mỗi Cart có một buyer
+//	    
 	    @OneToOne
-	    @JoinColumn(name = "buyer_id", nullable = false)
-	    private Buyer buyer; // Mỗi Cart có một buyer
+	    @JoinColumn(name = "buyer_id", referencedColumnName = "id", nullable = false)
+	    private Buyer buyer; // Trỏ đến `User.id` thông qua `Buyer`
 }

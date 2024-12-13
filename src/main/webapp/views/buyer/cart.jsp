@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-
-      <!--Cart Start-->
+<!--Cart Start-->
         <div class="cart-page section-padding-5">
             <div class="container">
                 <div class="cart-table table-responsive">

@@ -37,65 +37,65 @@ public class ProductReviewController {
 	public String index() {
 		return "test";
 	}
-	
-	@GetMapping("")
-	public String review( @RequestParam("buyerId") Long buyerID, @RequestParam("productId") Long productId, Model model) {
-	    model.addAttribute("buyerId", buyerID);
-	    Optional<Product> product = productService.findById(productId);
-	    model.addAttribute("product", product);
-	    return "/buyer/product-review";
-	}
-	@GetMapping("/editReview")
-	public String edit(@RequestParam("buyerId") Long buyerId, @RequestParam("productId") Long productId, Model model) {
-		Optional<Product> product = productService.findById(productId);
-		Optional<ProductReview> review = reivewService.getReviewByBuyerAndProduct(buyerId, productId);
-        
-        if (review.isPresent()) {
-        	ProductReview review2 =review.get();
-        	model.addAttribute("review",review2);
-        }
-		model.addAttribute("product",product);
-		return "/buyer/product-review";
-	}
-
-	
-	@PostMapping("/save")
-	public ModelAndView saveOrUpdateReview(ModelMap model, @Valid @ModelAttribute("review") ProductReview review,
-	        @RequestParam("buyerId") Long buyerId, @RequestParam("productId") Long productId,
-	        BindingResult result) {
-
-	    // Kiểm tra lỗi xác thực
-	    if (result.hasErrors()) {
-	        model.addAttribute("message", "Validation errors occurred.");
-	        return new ModelAndView("review", model); 
-	    }
-
-	    // Tạo đối tượng Buyer và Product từ buyerId và productId
-	    Buyer buyer = new Buyer();
-	    buyer.setId(buyerId);
-	    Product product = new Product();
-	    product.setId(productId);
-	    review.setBuyer(buyer);
-	    review.setProduct(product);
-	    review.setReviewDate(LocalDate.now());
-
-	    // Kiểm tra xem bài đánh giá đã tồn tại chưa
-	    Optional<ProductReview> Reviewold = reivewService.getReviewByBuyerAndProduct(buyerId, productId);
-	    
-	    if (Reviewold.isPresent()) {
-	    	ProductReview existingReview =Reviewold.get();
-	        existingReview.setRating(review.getRating());
-	        existingReview.setReviewContent(review.getReviewContent());
-	        existingReview.setReviewDate(LocalDate.now());
-	        reivewService.save(existingReview);  // Cập nhật vào cơ sở dữ liệu
-	        model.addAttribute("message", "Review updated!");
-	    } else {
-	        // Thêm mới review nếu chưa tồn tại
-	    	reivewService.save(review);  // Thêm mới vào cơ sở dữ liệu
-	        model.addAttribute("message", "Review added!");
-	    }
-
-	    return new ModelAndView("index", model); 
-	}
+//	
+//	@GetMapping("")
+//	public String review( @RequestParam("buyerId") Long buyerID, @RequestParam("productId") Long productId, Model model) {
+//	    model.addAttribute("buyerId", buyerID);
+//	    Optional<Product> product = productService.findById(productId);
+//	    model.addAttribute("product", product);
+//	    return "/buyer/product-review";
+//	}
+//	@GetMapping("/editReview")
+//	public String edit(@RequestParam("buyerId") Long buyerId, @RequestParam("productId") Long productId, Model model) {
+//		Optional<Product> product = productService.findById(productId);
+//		Optional<ProductReview> review = reivewService.getReviewByBuyerAndProduct(buyerId, productId);
+//        
+//        if (review.isPresent()) {
+//        	ProductReview review2 =review.get();
+//        	model.addAttribute("review",review2);
+//        }
+//		model.addAttribute("product",product);
+//		return "/buyer/product-review";
+//	}
+//
+//	
+//	@PostMapping("/save")
+//	public ModelAndView saveOrUpdateReview(ModelMap model, @Valid @ModelAttribute("review") ProductReview review,
+//	        @RequestParam("buyerId") int buyerId, @RequestParam("productId") Long productId,
+//	        BindingResult result) {
+//
+//	    // Kiểm tra lỗi xác thực
+//	    if (result.hasErrors()) {
+//	        model.addAttribute("message", "Validation errors occurred.");
+//	        return new ModelAndView("review", model); 
+//	    }
+//
+//	    // Tạo đối tượng Buyer và Product từ buyerId và productId
+//	    Buyer buyer = new Buyer();
+//	    buyer.setId(buyerId);
+//	    Product product = new Product();
+//	    product.setId(productId);
+//	    review.setBuyer(buyer);
+//	    review.setProduct(product);
+//	    review.setReviewDate(LocalDate.now());
+//
+//	    // Kiểm tra xem bài đánh giá đã tồn tại chưa
+//	    Optional<ProductReview> Reviewold = reivewService.getReviewByBuyerAndProduct((Long) (buyerId) , productId);
+//	    
+//	    if (Reviewold.isPresent()) {
+//	    	ProductReview existingReview =Reviewold.get();
+//	        existingReview.setRating(review.getRating());
+//	        existingReview.setReviewContent(review.getReviewContent());
+//	        existingReview.setReviewDate(LocalDate.now());
+//	        reivewService.save(existingReview);  // Cập nhật vào cơ sở dữ liệu
+//	        model.addAttribute("message", "Review updated!");
+//	    } else {
+//	        // Thêm mới review nếu chưa tồn tại
+//	    	reivewService.save(review);  // Thêm mới vào cơ sở dữ liệu
+//	        model.addAttribute("message", "Review added!");
+//	    }
+//
+//	    return new ModelAndView("index", model); 
+//	}
 
 }

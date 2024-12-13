@@ -31,6 +31,8 @@ import com.starshop.services.ProductService;
 import com.starshop.services.impl.CartServiceImpl;
 import com.starshop.services.impl.ProductServiceImpl;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @RequestMapping("/buyer/cart")
 @Controller
 public class CartController {
@@ -42,11 +44,14 @@ public class CartController {
 	@Autowired
 	private BuyerService buyerService;
 	@GetMapping("")
-	public String viewCart(Model model, @RequestParam(name = "cartID", required = false) Long cartid) {
+	public String viewCart(Model model, @RequestParam(name = "cartID", required = false) Long cartid, HttpServletRequest request) {
 		if (cartid == null) {
 			// Xử lý trường hợp cartID không có trong request
 			throw new RuntimeException("cartID is required");
 		}
+		Buyer buyer = buyerService.findById(1L).orElseThrow(() -> new RuntimeException("Buyer not found"));
+		request.getSession().setAttribute("buyer", buyer);
+		
 		ShoppingCart cart = cartService.findByCartId(cartid).orElseThrow(() -> new RuntimeException("cart not found"));
 		model.addAttribute("cartID", cartid); // Truyền cartID vào model
 		List<CartItem> cartItems = cart.getCartItems();

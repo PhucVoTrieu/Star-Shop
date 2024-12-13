@@ -1,80 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<div class="container">
-    <div class="col-md-9 col-sm-9">
-        <h1>Login</h1>
-        <div class="content-form-page">
-            <div class="row">
-                <div class="col-md-7 col-sm-7">
-                    <form id="loginForm" class="form-horizontal form-without-legend" role="form">
-                        <div class="form-group">
-                            <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
-                            <div class="col-lg-8">
-                                <input type="text" class="form-control" id="email" name="email">
+  <!--Login Start-->
+        <div class="login-page section-padding-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="login-register-content">
+                            <h4 class="title">Login to Your Account</h4>
+
+                            <div class="login-register-form">
+                                <form action="" method ="post">
+                                    <div class="single-form">
+                                        <label>Email address *</label>
+                                        <input type="email" id="email">
+                                    </div>
+                                    <div class="single-form">
+                                        <label>Password</label>
+                                        <input type="password" id="password" required autocomplete="on">
+                                    </div>
+                                    <div class="single-form">
+                                        <button id="Login" class="btn btn-primary btn-block">Login</button>
+                                    </div>
+                                    <div class="single-form d-flex justify-content-between">
+                                        <div class="cus-checkbox">
+                                            <input type="checkbox" id="remember">
+                                            <label for="remember"><span></span> Remember Me</label>
+                                        </div>
+                                        <div class="forget">
+                                            <a href="#">Lost Your Password</a>
+                                        </div>
+                                    </div>
+                                    <div class="single-form">
+                                        <label>You don't have account ?</label>
+                                        <a href="register.html" class="btn btn-dark btn-block">Create Account Now</a>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
-                            <div class="col-lg-8">
-                                <input type="password" class="form-control" id="password" name="password">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8 col-md-offset-4 padding-left-0">
-                                <a href="${pageContext.request.contextPath}/forgot-password">Forget Password?</a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                                <button id="loginButton" type="submit" class="btn btn-primary">Login</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-4 col-sm-4 pull-right">
-                    <div class="form-info">
-                        <h2><em>Important</em> Information</h2>
-                        <p>Duis autem vel eum iriure at dolor vulputate velit esse vel molestie at dolore.</p>
-                        <button type="button" class="btn btn-default">More details</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+        <!--Login End-->
+        
+      <script>
+    document.getElementById("Login").addEventListener("click", async function (e) {
+        e.preventDefault(); // Prevent form submission
+        
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-<script>
-    document.getElementById('loginForm').addEventListener('submit', function (event) {
-        event.preventDefault(); // Ngăn form gửi thông thường
-
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-
-        fetch('/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result.authenticated) {
-                    const token = data.result.token;
-                    localStorage.setItem('authToken', token); // Lưu token vào localStorage
-                    alert('Đăng nhập thành công!');
-                    window.location.href = '/'; // Điều hướng đến trang hồ sơ
-                } else {
-                    alert('Đăng nhập thất bại: ' + (data.message || 'Unknown error'));
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while logging in.');
+        try {
+            const response = await fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
             });
+
+            if (response.ok) {
+                const data = await response.json();
+              //  alert('Login successful! Token: ' + data.token);
+
+                // Optionally store the token in localStorage or a cookie
+              //  document.cookie = `jwtToken=${data.token}; path=/; max-age=${data.expiresIn}`;
+                
+                // Redirect to a protected page
+                window.location.href = '/common/products';
+            } else {
+                const error = await response.json();
+                alert('Login failed: ' + error.message);
+            }
+        } catch (err) {
+            console.error('Error:', err);
+            alert('An error occurred. Please try again.');
+        }
     });
 </script>
-</body>
-</html>
+
+
+      
