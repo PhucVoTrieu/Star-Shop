@@ -1,14 +1,13 @@
 package com.starshop.services;
 
-import java.util.List;
+import java.util.Optional;
 
 import com.starshop.entities.Order;
 
 public interface OrderService {
 
-    void updateOrderStatus(Long orderId, String newStatus);
-    void bulkUpdateOrderStatus(List<Long> orderIds, String newStatus);
-    
-    String cancelOrder(Long orderId);
-    void placeOrder(Order order);
+	Optional<Order> findById(Long id);
+
+	<S extends Order> S save(S entity);
+
 }

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.starshop.entities.Buyer;
 
 @Repository
-public interface BuyerRepository extends JpaRepository<Buyer, Long>{
+public interface BuyerRepository extends JpaRepository<Buyer, Integer>{
 	Buyer findBuyerByEmail(String email);
 }

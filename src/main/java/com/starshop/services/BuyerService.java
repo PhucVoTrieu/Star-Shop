@@ -6,7 +6,7 @@ import com.starshop.entities.Buyer;
 
 public interface BuyerService {
 
-	Optional<Buyer> findById(Long id);
+	Optional<Buyer> findById(int buyerID);
 
 	Buyer findBuyerByEmail(String email);
 

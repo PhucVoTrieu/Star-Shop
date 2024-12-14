@@ -129,7 +129,7 @@
                                 </table>
                             </div>
                             <div class="cart-total-btn">
-                                <a href="#" class="btn btn-primary btn-block">Proceed To Checkout</a>
+                                <a href="${pageContext.request.contextPath}/buyer/checkout/${cartID}" class="btn btn-primary btn-block" >Proceed To Checkout</a>
                             </div>
                         </div>
                     </div>

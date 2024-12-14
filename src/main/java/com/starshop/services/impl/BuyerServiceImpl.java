@@ -15,7 +15,7 @@ public class BuyerServiceImpl implements BuyerService{
 	BuyerRepository buyerRepository;
 
 	@Override
-	public Optional<Buyer> findById(Long id) {
+	public Optional<Buyer> findById(int id) {
 		return buyerRepository.findById(id);
 	}
 

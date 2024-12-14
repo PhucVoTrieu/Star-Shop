@@ -2,6 +2,8 @@ package com.starshop.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,12 +25,14 @@ public class CartItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_id")
 	private Product product;
 
 	private int quantity;
 	
+	 @JsonIgnore 
 	@ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)
     private ShoppingCart shoppingCart;

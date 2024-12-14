@@ -122,50 +122,66 @@
 
                                         </ul>
                                     </div>
+                                    
+                                    <%
+    // Lấy danh sách tất cả các cookie từ request
+    Cookie[] cookies = request.getCookies();
+    String cartID = null;
+
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("cartID".equals(cookie.getName())) {
+                cartID = cookie.getValue();
+                break;
+            }
+        }
+    }
+
+%>
                                     <div class="header-account-list dropdown mini-cart">
-                                        <a href="#" role="button" data-bs-toggle="dropdown">
+                                        <a href="${pageContext.request.contextPath}/buyer/cart?cartID=<%= cartID %>"  >
                                             <i class="icon-shopping-bag"></i>
-                                            <span class="item-count ">3</span>
+<!--                                             <span class="item-count "></span> -->
                                         </a>
 
-                                        <ul class="dropdown-menu ">
-                                            <ul class="product-cart">
+<!--                                         <ul class="dropdown-menu "> -->
+<!--                                             <ul class="product-cart"> -->
                                             
-                                            <c:set var="subTotal" value="0.0" />
-    <!-- Duyệt qua các item trong giỏ hàng -->
-    <c:forEach var="item" items="${sessionScope.buyer.shoppingCart.cartItems}">
-        <li class="single-cart-box">
-            <div class="cart-img">
-                <a href="shop-single.html"><img src="${item.product.imageUrl}" alt="${item.product.name} "></a>
-                <span class="pro-quantity">${item.quantity}x</span>
-            </div>
-            <div class="cart-content">
-                <h6 class="title"><a href="shop-single.html">${item.product.name}</a></h6>
-                <div class="cart-price">
-                    <span class="sale-price" >$${item.product.price}</span>
-                    <span class="regular-price">$${item.product.price}</span>
-                </div>
-            </div>
-            <a href="javascript:void(0);" class="del-icon"><i class="fa fa-trash"></i></a>
-        </li>
-         <c:set var="subTotal" value="${subTotal + item.product.price * item.quantity}" />
-    </c:forEach>
+<%--                                             <c:set var="subTotal" value="0.0" /> --%>
+<!--     Duyệt qua các item trong giỏ hàng -->
+<%--     <c:forEach var="item" items="${sessionScope.buyer.shoppingCart.cartItems}"> --%>
+<!--         <li class="single-cart-box"> -->
+<!--             <div class="cart-img"> -->
+<%--                 <a href="shop-single.html"><img src="${item.product.imageUrl}" alt="${item.product.name} "></a> --%>
+<%--                 <span class="pro-quantity">${item.quantity}x</span> --%>
+<!--             </div> -->
+<!--             <div class="cart-content"> -->
+<%--                 <h6 class="title"><a href="shop-single.html">${item.product.name}</a></h6> --%>
+<!--                 <div class="cart-price"> -->
+<!--                     <span class="sale-price" >$${item.product.price}</span> -->
+<!--                     <span class="regular-price">$${item.product.price}</span> -->
+<!--                 </div> -->
+<!--             </div> -->
+<!--             <a href="javascript:void(0);" class="del-icon"><i class="fa fa-trash"></i></a> -->
+<!--         </li> -->
+<%--          <c:set var="subTotal" value="${subTotal + item.product.price * item.quantity}" /> --%>
+<%--     </c:forEach> --%>
     
            
-</ul>
-                                            <li class="product-total">
-                                                <ul class="cart-total">
-                                                    <li> Sub Total : <span>$ ${subTotal}</span></li>
-                                                </ul>
-                                            </li>
-                                            <li class="product-btn">
+<!-- </ul> -->
+<!--                                             <li class="product-total"> -->
+<!--                                                 <ul class="cart-total"> -->
+<%--                                                     <li> Sub Total : <span>$ ${subTotal}</span></li> --%>
+<!--                                                 </ul> -->
+<!--                                             </li> -->
+<!--                                             <li class="product-btn"> -->
                                             
-                                            <a href="${pageContext.request.contextPath}/buyer/cart?cartID=1" class="btn btn-dark d-block" style=" margin-bottom: 10px;"  >View Cart</a>
+<%--                                             <a href="${pageContext.request.contextPath}/buyer/cart?cartID=1" class="btn btn-dark d-block" style=" margin-bottom: 10px;"  >View Cart</a> --%>
                                             
-								<a href="checkout.html" class="btn btn-dark d-block">Checkout</a>
+<!-- 								<a href="checkout.html" class="btn btn-dark d-block">Checkout</a> -->
 
-                                            </li>
-                                        </ul>
+<!--                                             </li> -->
+<!--                                         </ul> -->
                                     </div>
                                 </div>
                             </div>

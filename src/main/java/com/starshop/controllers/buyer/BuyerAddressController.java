@@ -44,7 +44,7 @@ public class BuyerAddressController {
                 @RequestParam String commune,
                 @RequestParam String district,
                 @RequestParam String province,
-                RedirectAttributes redirectAttributes,@RequestParam Long currentBuyerID) {
+                RedirectAttributes redirectAttributes,@RequestParam int currentBuyerID) {
 	    	Buyer curBuyer = buyerService.findById(currentBuyerID).orElseThrow(()->new RuntimeException("Buyer Not found"));
 	    	
 	    	

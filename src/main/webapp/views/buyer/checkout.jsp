@@ -1,196 +1,203 @@
-i<%@ include file="/common/taglibs.jsp"%>
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglibs.jsp"%>
+  <!--Register Start-->
+        <div class="checkout-page section-padding-5">
+            <div class="container">
+               
 
-<body class="ecommerce">
-	<div class="main">
-		<div class="container">
-			<ul class="breadcrumb">
-				<li><a href="index.html">Home</a></li>
-				<li><a href="">Store</a></li>
-				<li class="active">Checkout</li>
-			</ul>
-			<!-- BEGIN SIDEBAR & CONTENT -->
-			<div class="row margin-bottom-40">
-				<!-- BEGIN CONTENT -->
-				<div class="col-md-12 col-sm-12">
-					<h1>Checkout</h1>
-					<!-- BEGIN CHECKOUT PAGE -->
-					<div class="panel-group checkout-page accordion scrollable"
-						id="checkout-page">
+                <form action="${pageContext.request.contextPath}/buyer/orders/placeOrder" method="post">
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <div class="checkout-form mt-30">
 
-						<form action="<c:url value="/buyer/orders/saveOrder"/>" method="post">
-							<!-- BEGIN CONFIRM -->
-							<div id="confirm" class="panel panel-default">
+                                <div class="checkout-title">
+                                    <h4 class="title">Shipping address details</h4>
+                                    
+                                </div>
+										<div class="single-select2">
+    <label>Address *</label>
+    <div class="form-select2">
+        <select class="select2" id="addressDropdown" onchange="fillAddressFields(this)">
+            <c:forEach items="${shippingAddress}" var="address" varStatus="STT">
+                <option value="${address.id}"
+                    data-province="${address.province}" 
+                    data-district="${address.district}" 
+                    data-commune="${address.commune}" 
+                    data-streetNumber="${address.streetNumber}" 
+                    data-streetName="${address.streetName}">
+                    Address ${STT.index+1}
+                </option>
+            </c:forEach>
+        </select>
+    </div>
+</div>
 
-								<div class="panel-heading">
-									<h2 class="panel-title">
-										<a data-toggle="collapse" data-parent="#checkout-page"
-											href="#confirm-content" class="accordion-toggle"> Confirm
-											Order </a>
-									</h2>
-								</div>
-								<div id="confirm-content" class="panel-collapse collapse">
-								</div>
-
-								<!-- thong tin -->
-								<div class="panel-body row">
-								
-								<!-- thông báo lỗi -->
-								 <c:if test="${not empty error2}">
-            						<div class="alert alert-danger">${error2}</div>
-       							 </c:if>
-								
-
-									<div class="form-group">
-   									 <label for="country-dd">Address <span class="require">*</span></label>
-    								<select class="form-control input-sm" id="country-dd" name="address">
-       									 <option value="">--- Please Select ---</option>
-       									 <option value="244">address 1</option>
-       									 <option value="1">address 2</option>
-       									 <option value="2">address 3</option>
-   									 </select>
-									</div>
-
-
-								</div>
-
-							</div>
-
-
-							<!-- thong tin -->
-
-
-							<div class="panel-body row">
-								<div class="col-md-12 clearfix">
-									<div class="table-wrapper-responsive">
-									
-									<input type="hidden" name="buyerid" value="${buyerId}"></input>
-										<table>
-											<tr>
-												<th class="checkout-image">Image</th>
-												<th class="checkout-description">Description</th>
-
-												<th class="checkout-quantity">Quantity</th>
-												<th class="checkout-price">Price</th>
-												<th class="checkout-total">Total</th>
-											</tr>
-										<c:forEach var="i" items="${productList}">
-    <tr>
-        <td class="checkout-image"><a href="#"><img src="${i.image}" alt="${i.name}"></a></td>
-        <td class="checkout-description">
-            <h3><a href="#">${i.name}</a></h3>
-            <input type="hidden" name="productIds[${status.index}]" value="${i.id}" />
-        </td>
-        <td class="checkout-quantity"><strong>1</strong>
-            <input type="hidden" name="quantities[${status.index}]" value="1" />
-        </td>
-        <td class="checkout-price"><strong><span>$</span>${i.price}</strong>
-            <input type="hidden" name="prices[${status.index}]" value="${i.price}" />
-        </td>
-        <td class="checkout-total"><strong><span>$</span>${i.price}</strong></td>
-    </tr>
-</c:forEach>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="single-form">
+            <label>Province *</label>
+            <input type="text" id="province" readonly>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="single-form">
+            <label>District *</label>
+            <input type="text" id="district" readonly>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="single-form">
+            <label>Commune *</label>
+            <input type="text" id="commune" readonly>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="single-form">
+            <label>Street Number *</label>
+            <input type="text" id="streetNumber" readonly>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="single-form">
+            <label>Street Name *</label>
+            <input type="text" id="streetName" readonly>
+        </div>
+    </div>
+</div>
 
 
+                              
 
-										</table>
-										
-									</div>
+                                <div class="single-form checkout-note">
+                                    <label>Order notes</label>
+                                    <textarea placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-5">
+                            <div class="checkout-review-order mt-30">
+                                <div class="checkout-title">
+                                    <h4 class="title">Your Order</h4>
+                                </div>
+
+                                <div class="checkout-review-order-table table-responsive mt-15">
+                                    <table class="table">
+    <thead>
+        <tr>
+            <th class="Product-name">Product</th>
+            <th class="Product-quantity" style="text-align: center;">Quantity</th>
+            <th class="Product-price">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Duyệt qua danh sách cartItemList -->
+         
+         
+        <c:forEach var="item" items="${cartItemList}">
+            <tr>
+                <td class="Product-name">
+                    <p>${item.product.name}  </p> <!-- Tên sản phẩm -->
+
+                </td>
+                <td class="Product-quantity" style="text-align: center;">
+                    <p>${item.quantity}</p> <!-- Số lượng -->
+                </td>
+                <td class="Product-price">
+                    <p>${item.product.price * item.quantity}</p> <!-- Tổng giá -->
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+    <tfoot>
+    
+     <tr>
+            <td class="Product-name"><p id="selectedAddress">Selected Address: None</p></td>
+            <td>
+          <input type="hidden" value=${cartID } name="cartID">
+
+            <input type="hidden" name="buyerID" value="${buyerID}">
+      
+            </td>
+            <td class="Product-price">
+               
+            </td>
+        </tr>
+        
+        <tr>
+            <td class="Product-name"><p>Subtotal</p></td>
+            <td></td>
+            <td class="Product-price">
+                <p>
+                    <!-- Tính tổng giá trị giỏ hàng -->
+                    <c:set var="subtotal" value="0" />
+                    <c:forEach var="item" items="${cartItemList}">
+                        <c:set var="subtotal" value="${subtotal + (item.product.price * item.quantity)}" />
+                    </c:forEach>
+                    £${subtotal}
+                </p>
+            </td>
+        </tr>
+       
+        <tr>
+            <td class="Product-name"><p>Total</p></td>
+            <td></td>
+            <td class="total-price">
+                <p>£<c:set var="total" value="${subtotal}" />${total}</p>
+            </td>
+              <td>    <input type="hidden" name="totalPrice" value="${subtotal}"> </td>
+        </tr>
+    </tfoot>
+</table>
+
+                                </div>
+
+                                <div class="checkout-payment">
+
+                                    <div class="checkout-btn">
+                                        <button class="btn btn-primary btn-block" type="submit">Place Order</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--Register End-->
+        
+        <script>
+        function fillAddressFields(selectElement) {
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+
+            // Lấy giá trị từ các thuộc tính data-*
+            const province = selectedOption.getAttribute("data-province") || 'N/A';
+            const district = selectedOption.getAttribute("data-district") || 'N/A';
+            const commune = selectedOption.getAttribute("data-commune") || 'N/A';
+            const streetNumber = selectedOption.getAttribute("data-streetNumber") || 'N/A';
+            const streetName = selectedOption.getAttribute("data-streetName") || 'N/A';
+
+            // In log để kiểm tra
+            //alert("Selected Address:", ${streetNumber} );
+
+            // Gán giá trị vào các trường input
+            document.getElementById("province").value = province;
+            document.getElementById("district").value = district;
+            document.getElementById("commune").value = commune;
+            document.getElementById("streetNumber").value = streetNumber;
+            document.getElementById("streetName").value = streetName;
+
+            // Hiển thị địa chỉ trong thẻ <p>
+            const fullAddress ="Selected address: "+ streetNumber + " " + streetName + ", " + commune + ", " + district + ", " + province;
+            document.getElementById("selectedAddress").textContent = fullAddress;
+
+        }
 
 
-									<!-- phuong thuc thanh toan -->
-									
-									<!-- thông báo lỗi -->
-								 <c:if test="${not empty error}">
-            						<div class="alert alert-danger">${error}</div>
-       							 </c:if>
-
-									<div class="panel-body row">
-										<div class="col-md-12">
-											<p>Please select the preferred payment method to use on
-												this order.</p>
-											<div class="radio-list">
-												<label> <input type="radio" name="CashOnDelivery"
-													value="CashOnDelivery"> Cash On Delivery
-												</label>
-											</div>
-											<div class="form-group">
-												<label for="delivery-payment-method">Add Comments
-													About Your Order</label>
-												<textarea id="delivery-payment-method" rows="8"
-													class="form-control"></textarea>
-											</div>
-
-
-										</div>
-									</div>
-
-									<!-- phuong thuc thanh toan -->
-
-
-									<div class="checkout-total-block">
-										<ul>
-											<li><em>Sub total</em> <strong class="price"><span>$</span>47.00</strong>
-											</li>
-											<li><em>Shipping cost</em> <strong class="price"><span>$</span>3.00</strong>
-											</li>
-											<li><em>Eco Tax (-2.00)</em> <strong class="price"><span>$</span>3.00</strong>
-											</li>
-											<li><em>VAT (17.5%)</em> <strong class="price"><span>$</span>3.00</strong>
-											</li>
-											<li class="checkout-total-price"><em>Total</em> <strong
-												class="price"><span>$</span>56.00</strong></li>
-										</ul>
-									</div>
-									<div class="clearfix"></div>
-									<button class="btn btn-primary pull-right" type="submit"
-										id="button-confirm">Confirm Order</button>
-									<button type="button"
-										class="btn btn-default pull-right margin-right-20">Cancel</button>
-								</div>
-							</div>
-					</div>
-				</div>
-				<!-- END CONFIRM -->
-				</form>
-			</div>
-			<!-- END CHECKOUT PAGE -->
-		</div>
-		<!-- END CONTENT -->
-	</div>
-	<!-- END SIDEBAR & CONTENT -->
-
-
-
-	<!-- BEGIN STEPS -->
-	<div class="steps-block steps-block-red">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 steps-block-col">
-					<i class="fa fa-truck"></i>
-					<div>
-						<h2>Free shipping</h2>
-						<em>Express delivery withing 3 days</em>
-					</div>
-					<span>&nbsp;</span>
-				</div>
-				<div class="col-md-4 steps-block-col">
-					<i class="fa fa-gift"></i>
-					<div>
-						<h2>Daily Gifts</h2>
-						<em>3 Gifts daily for lucky customers</em>
-					</div>
-					<span>&nbsp;</span>
-				</div>
-				<div class="col-md-4 steps-block-col">
-					<i class="fa fa-phone"></i>
-					<div>
-						<h2>477 505 8877</h2>
-						<em>24/7 customer care available</em>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- END STEPS -->
-
-</body>
+</script>
+        
+       <script type="text/javascript">
+    var cartItemListJson = JSON.stringify(${cartItemList});
+    document.getElementById("orderItemList").value = cartItemListJson;
+</script>

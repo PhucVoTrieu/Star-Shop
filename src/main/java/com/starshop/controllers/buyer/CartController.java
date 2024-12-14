@@ -49,7 +49,7 @@ public class CartController {
 			// Xử lý trường hợp cartID không có trong request
 			throw new RuntimeException("cartID is required");
 		}
-		Buyer buyer = buyerService.findById(1L).orElseThrow(() -> new RuntimeException("Buyer not found"));
+		Buyer buyer = buyerService.findById(1).orElseThrow(() -> new RuntimeException("Buyer not found"));
 		request.getSession().setAttribute("buyer", buyer);
 		
 		ShoppingCart cart = cartService.findByCartId(cartid).orElseThrow(() -> new RuntimeException("cart not found"));
@@ -134,7 +134,7 @@ public class CartController {
 	public ResponseEntity<Map<String, Object>> addCartItem(@RequestParam("productID") Long productId) {
 	    Map<String, Object> response = new HashMap<>();
 	    Optional<Product> product = productService.findById(productId);
-	    Buyer buyer = buyerService.findById(1L).orElseThrow(() -> new RuntimeException("Buyer not found"));
+	    Buyer buyer = buyerService.findById(1).orElseThrow(() -> new RuntimeException("Buyer not found"));
 
 	    if (product.isPresent()) {
 	        // Thêm sản phẩm vào giỏ hàng
