@@ -59,8 +59,13 @@ public class BuyerProductController {
 	// Lấy tất cả sản phẩm với phân trang
 	@RequestMapping("")
 	public String allProducts(ModelMap model, Pageable pageable) {
+		 int size = pageable.getPageSize() > 0 ? pageable.getPageSize() : 10; // Mặc định size = 10
+		    int page = pageable.getPageNumber() >= 0 ? pageable.getPageNumber() : 0; // Đảm bảo page không âm
+
+		    
+		    
 		Page<Product> productPage = productService
-				.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
+				.findAll(PageRequest.of(page, size));
 		addPaginationAttributes(model, pageable, productPage);
 		setProductImageUrls(productPage);
 		model.addAttribute("productPage", productPage);
@@ -118,17 +123,7 @@ public class BuyerProductController {
 		return "buyer/product-detail"; // Trang hiển thị danh sách sản phẩm
 	}
 
-	// Thông báo
-	private String getMessage(Page<Product> resultPage, String name) {
-		if (StringUtils.hasText(name)) {
-			if (resultPage.hasContent()) {
-				return "Tìm thấy " + resultPage.getTotalElements() + " sản phẩm";
-			} else {
-				return "Không tìm thấy sản phẩm";
-			}
-		}
-		return null;
-	}
+	
 
 	// phân trang
 	private void addPaginationAttributes(ModelMap model, Pageable pageable, Page<Product> productPage) {

@@ -48,6 +48,11 @@ public class User implements UserDetails {
 	@UpdateTimestamp
 	@Column(name = "updated_at")
 	private Date updatedAt;
+	
+	@ManyToOne
+	@JoinColumn(name = "admin_id")
+	private Admin admin;
+
 	public String getRole() {
         return this.getClass().getSimpleName();
     }

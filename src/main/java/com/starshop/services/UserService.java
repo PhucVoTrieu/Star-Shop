@@ -23,4 +23,7 @@ public class UserService {
 		
 		return users;
 	}
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
 }

@@ -44,7 +44,7 @@ public class SecurityConfiguration {
 				.requestMatchers("/api/**").permitAll()
 				.requestMatchers("/auth/login/**").permitAll()
 				.requestMatchers("/auth/**").permitAll()
-				.requestMatchers("/common**").permitAll()
+				.requestMatchers("/common/**").permitAll()
 				.requestMatchers("/login**").permitAll()
 				.requestMatchers("/register**").permitAll()
 				.requestMatchers("/assets/**").permitAll()

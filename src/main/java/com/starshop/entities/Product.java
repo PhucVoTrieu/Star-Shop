@@ -70,6 +70,11 @@ public class Product {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Favorite> favorites; // Sản phẩm yêu thích
 
+	@ManyToOne
+	@JoinColumn(name = "admin_id")
+	private Admin admin;
+
+	
 	@Override
 	public String toString() {
 		return "Product []";

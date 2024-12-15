@@ -60,13 +60,12 @@
 
             if (response.ok) {
                 const data = await response.json();
-              //  alert('Login successful! Token: ' + data.token);
-
-                // Optionally store the token in localStorage or a cookie
-              //  document.cookie = `jwtToken=${data.token}; path=/; max-age=${data.expiresIn}`;
+                if (data.role === 'ADMIN') {
+                    window.location.href = '/admin/home';
+                } else if (data.role === 'BUYER') {
+                    window.location.href = '/buyer/products';
+                }
                 
-                // Redirect to a protected page
-                window.location.href = '/common/products';
             } else {
                 const error = await response.json();
                 alert('Login failed: ' + error.message);

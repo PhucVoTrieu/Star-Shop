@@ -45,6 +45,11 @@ public class OrderServiceImpl implements OrderService{
     }
 
 	@Override
+	public List<Order> findAll() {
+		return orderRepository.findAll();
+	}
+
+	@Override
 	public <S extends Order> S save(S entity) {
 		return orderRepository.save(entity);
 	}

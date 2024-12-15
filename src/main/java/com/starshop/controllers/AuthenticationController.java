@@ -1,5 +1,7 @@
 package com.starshop.controllers;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -48,7 +50,7 @@ public class AuthenticationController {
 
 	@PostMapping(path = "/login")
 	@Transactional
-	public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserModel loginUser, HttpServletRequest request) {
+	public ResponseEntity<LoginResponse> authenticate(@RequestBody LoginUserModel loginUser, HttpServletRequest request) throws IOException {
 		User authenticatedUser = authenticationService.authenticate(loginUser);
 		String jwtToken = jwtService.generateToken(authenticatedUser);
 		Buyer buyer = buyerService.findBuyerByEmail(authenticatedUser.getEmail());
@@ -78,14 +80,16 @@ public class AuthenticationController {
 		LoginResponse loginResponse = new LoginResponse();
 		loginResponse.setToken(jwtToken);
 		loginResponse.setExpiresIn(jwtService.getExpirationTime());
-		
+		loginResponse.setRole(authenticatedUser.getRole());
 	    headers.add(HttpHeaders.SET_COOKIE, cookie.toString());
 	   
-
+	   
+	    
+	    
 	    // Trả về ResponseEntity với header
 	    return new ResponseEntity<>(loginResponse, headers, HttpStatus.OK);
 	    
-		//return ResponseEntity.ok(loginResponse).(HttpHeaders.SET_COOKIE, cookie.toString());
+	
 	}
 	
 	@PostMapping("/logout")

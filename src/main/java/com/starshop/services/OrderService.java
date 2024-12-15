@@ -1,5 +1,6 @@
 package com.starshop.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.starshop.entities.Buyer;
@@ -20,5 +21,10 @@ public interface OrderService {
 
 
 	boolean hasBuyerPurchasedProduct(Buyer buyer, Long productId);
+
+
+
+
+	List<Order> findAll();
 
 }

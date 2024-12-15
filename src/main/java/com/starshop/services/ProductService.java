@@ -20,6 +20,12 @@ public interface ProductService {
 
 	List<Product> findTopByOrderByCreatedDateDesc(Pageable pageable);
 
+	List<Product> findAll();
+
+	void deleteById(Long id);
+
+	<S extends Product> S save(S entity);
+
 
 	
 }

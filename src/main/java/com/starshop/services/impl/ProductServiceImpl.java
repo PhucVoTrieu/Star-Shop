@@ -23,13 +23,28 @@ public class ProductServiceImpl implements ProductService {
 	private ProductRepository productRepo;
 
 	@Override
+	public <S extends Product> S save(S entity) {
+		return productRepo.save(entity);
+	}
+
+	@Override
 	public Page<Product> findAll(Pageable pageable) {
 		return productRepo.findAll(pageable);
 	}
 
 	@Override
+	public List<Product> findAll() {
+		return productRepo.findAll();
+	}
+
+	@Override
 	public Optional<Product> findById(Long id) {
 		return productRepo.findById(id);
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		productRepo.deleteById(id);
 	}
 
 	@Override

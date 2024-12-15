@@ -119,15 +119,40 @@
 </div>
 </div>
                         <!--Pagination Start-->
-                        <div class="page-pagination">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item"><a class="page-link prev" href="#">Prev</a></li>
-                                <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link next" href="#">Next</a></li>
-                            </ul>
-                        </div>
+<!--                         <div class="page-pagination"> -->
+<!--                             <ul class="pagination justify-content-center"> -->
+<!--                                 <li class="page-item"><a class="page-link prev" href="#">Prev</a></li> -->
+<!--                                 <li class="page-item"><a class="page-link active" href="#">1</a></li> -->
+<!--                                 <li class="page-item"><a class="page-link" href="#">2</a></li> -->
+<!--                                 <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+<!--                                 <li class="page-item"><a class="page-link next" href="#">Next</a></li> -->
+<!--                             </ul> -->
+<!--                         </div> -->
+<div class="page-pagination">
+    <ul class="pagination justify-content-center">
+        <!-- Nút Previous -->
+        <c:if test="${productPage.hasPrevious()}">
+            <li class="page-item">
+                <a class="page-link prev" href="?page=${productPage.number - 1}&size=${productPage.size}">Prev</a>
+            </li>
+        </c:if>
+
+        <!-- Hiển thị các số trang -->
+        <c:forEach begin="0" end="${productPage.totalPages - 1}" var="i">
+            <li class="page-item ${i == productPage.number ? 'active' : ''}">
+                <a class="page-link" href="?page=${i}&size=${productPage.size}">${i + 1}</a>
+            </li>
+        </c:forEach>
+
+        <!-- Nút Next -->
+        <c:if test="${productPage.hasNext()}">
+            <li class="page-item">
+                <a class="page-link next" href="?page=${productPage.number + 1}&size=${productPage.size}">Next</a>
+            </li>
+        </c:if>
+    </ul>
+</div>
+
                         <!--Pagination End-->
 
 

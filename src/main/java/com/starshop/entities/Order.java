@@ -52,6 +52,10 @@ public class Order {
     
     private String orderNote;
 
+    @ManyToOne
+    @JoinColumn(name = "admin_id")
+    private Admin admin;
+
 	@Override
 	public String toString() {
 		return "Order []";
