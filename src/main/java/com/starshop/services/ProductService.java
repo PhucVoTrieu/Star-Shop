@@ -26,6 +26,10 @@ public interface ProductService {
 
 	<S extends Product> S save(S entity);
 
+	List<Product> getTopRatedProducts(int limit);
+
+	Page<Product> filterProducts(Long categoryId, Long colorId, Long recipientId, Pageable pageable);
+
 
 	
 }

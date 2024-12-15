@@ -24,10 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cloudinary.Cloudinary;
 import com.starshop.entities.Buyer;
 import com.starshop.entities.Category;
+import com.starshop.entities.FlowerColor;
+import com.starshop.entities.FlowerRecipient;
 import com.starshop.entities.Product;
 import com.starshop.entities.ProductReview;
 import com.starshop.services.BuyerService;
 import com.starshop.services.CategoryService;
+import com.starshop.services.FlowerColorService;
+import com.starshop.services.FlowerRecipientService;
 import com.starshop.services.JwtService;
 import com.starshop.services.OrderService;
 import com.starshop.services.ProductReviewService;
@@ -40,7 +44,12 @@ import jakarta.servlet.http.HttpServletRequest;
 @Controller
 @RequestMapping("/buyer/products")
 public class BuyerProductController {
-
+	@Autowired
+	private FlowerColorService flowerColorService;
+	@Autowired
+	private FlowerRecipientService flowerRecipientService;
+	@Autowired
+	private CategoryService categoryService;
 	@Autowired
 	private ProductService productService;
 	@Autowired
@@ -75,7 +84,18 @@ public class BuyerProductController {
 		model.addAttribute("latestProducts", latestProducts);
 		
 		
-		
+		 List<Product> topRatedProducts = productService.getTopRatedProducts(3); // Lấy 3 sản phẩm
+	        model.addAttribute("topRatedProducts", topRatedProducts);
+	        
+	        
+	        List<Category> categories = categoryService.findAll();
+		    List<FlowerColor> colors = flowerColorService.findAll();
+		    List<FlowerRecipient> recipients = flowerRecipientService.findAll();
+	        model.addAttribute("categories", categories);
+		    model.addAttribute("colors", colors);
+		    model.addAttribute("recipients", recipients);
+		    
+		    
 		return "buyer/product-list"; // Trang hiển thị danh sách sản phẩm
 	}
 

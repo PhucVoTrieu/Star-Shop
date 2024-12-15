@@ -21,7 +21,21 @@ import jakarta.validation.Valid;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductRepository productRepo;
-
+	
+	
+	 @Override
+	public Page<Product> filterProducts(Long categoryId, Long colorId, Long recipientId, Pageable pageable) {
+	        return productRepo.filterByCriteria(categoryId, colorId, recipientId, pageable);
+	    }
+	 @Override
+	public List<Product> getTopRatedProducts(int limit) {
+	        return productRepo.findAll().stream()
+	                .filter(product -> product.getReviews() != null && !product.getReviews().isEmpty()) // Chỉ lấy sản phẩm có đánh giá
+	                .sorted((p1, p2) -> Double.compare(p2.getAverageRating(), p1.getAverageRating())) // Sắp xếp giảm dần theo rating
+	                .limit(limit) // Lấy số lượng sản phẩm cần thiết
+	                .toList();
+	    }
+	 
 	@Override
 	public <S extends Product> S save(S entity) {
 		return productRepo.save(entity);

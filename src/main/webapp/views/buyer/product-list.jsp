@@ -33,7 +33,7 @@
                             <div class="top-bar-btn">
                                 <ul class="nav"">
             <li class=" nav-item"><a class="nav-link grid active" data-bs-toggle="tab" href="#grid"></a></li>
-                                    <li class="nav-item"><a class="nav-link list" data-bs-toggle="tab" href="#list"></a></li>
+<!--                                     <li class="nav-item"><a class="nav-link list" data-bs-toggle="tab" href="#list"></a></li> -->
                                 </ul>
                             </div>
                             <div class="top-bar-sorter">
@@ -161,65 +161,51 @@
                         <div class="shop-sidebar">
 
 
-                            <!--Sidebar Categories Start-->
-                            <div class="sidebar-categories">
-                                <h3 class="widget-title">Custom category</h3>
+                       <div class="sidebar-categories">
+    <h3 class="widget-title">Categories</h3>
+    <ul class="categories-list">
+        <c:forEach var="category" items="${categories}">
+            <li>
+                <a href="/filter?categoryId=${category.id}&colorId=${selectedColor}&recipientId=${selectedRecipient}">
+                    ${category.name}
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 
-                                <ul class="categories-list">
-                                    <li><a href="#">Delivery</a></li>
-                                    <li><a href="#">Legal Notice</a></li>
-                                    <li><a href="#">Secure payment</a></li>
-                                    <li><a href="#">Sitemap</a></li>
-                                    <li><a href="#">About us</a></li>
-                                </ul>
-                            </div>
-                            <!--Sidebar Categories End-->
+<div class="sidebar-color">
+    <h3 class="widget-title">Colors</h3>
+    <ul class="color-list">
+        <c:forEach var="color" items="${colors}">
+            <li>
+                <a href="/filter?categoryId=${selectedCategory}&colorId=${color.id}&recipientId=${selectedRecipient}">
+                    ${color.colorName}
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 
+<div class="sidebar-recipients">
+    <h3 class="widget-title">Recipients</h3>
+    <ul class="categories-list">
+        <c:forEach var="recipient" items="${recipients}">
+            <li>
+                <a href="/filter?categoryId=${selectedCategory}&colorId=${selectedColor}&recipientId=${recipient.id}">
+                    ${recipient.name}
+                </a>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 
-
-                            <!--Sidebar Categories Start-->
-                            <div class="sidebar-categories">
-                                <h3 class="widget-title">Categories</h3>
-
-                                <ul class="categories-list">
-                                    <li><a href="#">Best Sellers <span>(8)</span></a></li>
-                                    <li><a href="#">Featured <span>(9)</span></a></li>
-                                    <li><a href="#">New <span>(8)</span></a></li>
-                                </ul>
-                            </div>
-                            <!--Sidebar Categories End-->
-
-
-
-                            <!--Sidebar Color Start-->
-                            <div class="sidebar-color">
-                                <h3 class="widget-title">Color</h3>
-
-                                <ul class="color-list">
-                                    <li class="active"> <span data-color="#ff0000"></span> Red</li>
-                                    <li> <span data-color="#008000"></span> Green</li>
-                                    <li> <span data-color="#0000ff"></span> Blue</li>
-                                    <li> <span data-color="#ffff00"></span> Yellow</li>
-                                    <li> <span data-color="#ffffff"></span> White</li>
-                                    <li> <span data-color="#ffd700"></span> Gold</li>
-                                </ul>
-                            </div>
                             <!--Sidebar Color End-->
 
 
 
                             <!--Sidebar Size Start-->
-                            <div class="sidebar-size">
-                                <h3 class="widget-title">Size</h3>
-
-                                <ul class="size-list">
-                                    <li><a href="javascript:void(0)">S</a></li>
-                                    <li><a href="javascript:void(0)">M</a></li>
-                                    <li><a href="javascript:void(0)">L</a></li>
-                                    <li><a href="javascript:void(0)">Xl</a></li>
-                                    <li><a href="javascript:void(0)">XXl</a></li>
-                                </ul>
-                            </div>
+                           
                             <!--Sidebar Size End-->
 
 
@@ -231,93 +217,131 @@
 
 
                             <!--Sidebar Product Start-->
-                            <div class="sidebar-product">
-                                <h3 class="widget-title">Top rated products</h3>
+<!--                             <div class="sidebar-product"> -->
+<!--                                 <h3 class="widget-title">Top rated products</h3> -->
 
-                                <ul class="product-list">
-                                    <li>
-                                        <div class="single-mini-product">
-                                            <div class="product-image">
-                                                <a href="shop-single.html"><img src="assets/images/product/product-8.jpg" alt=""></a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="shop-single.html">Lity Majesty Palm</a></h4>
-                                                <ul class="rating">
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                                <div class="price-box">
-                                                    <span class="old-price">$29.00</span>
-                                                    <span class="current-price">$19.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="single-mini-product">
-                                            <div class="product-image">
-                                                <a href="shop-single.html"><img src="assets/images/product/product-5.jpg" alt=""></a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="shop-single.html">Summer Savory</a></h4>
-                                                <ul class="rating">
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                                <div class="price-box">
-                                                    <span class="old-price">$85.00</span>
-                                                    <span class="current-price">$40.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="single-mini-product">
-                                            <div class="product-image">
-                                                <a href="shop-single.html"><img src="assets/images/product/product-7.jpg" alt=""></a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h4 class="title"><a href="shop-single.html">Sweet Alyssum</a></h4>
-                                                <ul class="rating">
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                    <li class="rating-on"><i class="fa fa-star-o"></i></li>
-                                                </ul>
-                                                <div class="price-box">
-                                                    <span class="current-price">$50.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+<!--                                 <ul class="product-list"> -->
+<!--                                     <li> -->
+<!--                                         <div class="single-mini-product"> -->
+<!--                                             <div class="product-image"> -->
+<!--                                                 <a href="shop-single.html"><img src="assets/images/product/product-8.jpg" alt=""></a> -->
+<!--                                             </div> -->
+<!--                                             <div class="product-content"> -->
+<!--                                                 <h4 class="title"><a href="shop-single.html">Lity Majesty Palm</a></h4> -->
+<!--                                                 <ul class="rating"> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                 </ul> -->
+<!--                                                 <div class="price-box"> -->
+<!--                                                     <span class="old-price">$29.00</span> -->
+<!--                                                     <span class="current-price">$19.00</span> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<!--                                         <div class="single-mini-product"> -->
+<!--                                             <div class="product-image"> -->
+<!--                                                 <a href="shop-single.html"><img src="assets/images/product/product-5.jpg" alt=""></a> -->
+<!--                                             </div> -->
+<!--                                             <div class="product-content"> -->
+<!--                                                 <h4 class="title"><a href="shop-single.html">Summer Savory</a></h4> -->
+<!--                                                 <ul class="rating"> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                 </ul> -->
+<!--                                                 <div class="price-box"> -->
+<!--                                                     <span class="old-price">$85.00</span> -->
+<!--                                                     <span class="current-price">$40.00</span> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </li> -->
+<!--                                     <li> -->
+<!--                                         <div class="single-mini-product"> -->
+<!--                                             <div class="product-image"> -->
+<!--                                                 <a href="shop-single.html"><img src="assets/images/product/product-7.jpg" alt=""></a> -->
+<!--                                             </div> -->
+<!--                                             <div class="product-content"> -->
+<!--                                                 <h4 class="title"><a href="shop-single.html">Sweet Alyssum</a></h4> -->
+<!--                                                 <ul class="rating"> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                     <li class="rating-on"><i class="fa fa-star-o"></i></li> -->
+<!--                                                 </ul> -->
+<!--                                                 <div class="price-box"> -->
+<!--                                                     <span class="current-price">$50.00</span> -->
+<!--                                                 </div> -->
+<!--                                             </div> -->
+<!--                                         </div> -->
+<!--                                     </li> -->
+<!--                                 </ul> -->
+<!--                             </div> -->
                             <!--Sidebar Product End-->
+<div class="sidebar-product">
+    <h3 class="widget-title">Top Rated Products</h3>
+
+    <ul class="product-list">
+        <c:forEach var="product" items="${topRatedProducts}">
+            <li>
+                <div class="single-mini-product">
+                    <div class="product-image">
+                        <!-- Link tới trang chi tiết sản phẩm -->
+                        <a href="shop-single.html?id=${product.id}">
+                            <img src="${product.imageUrl}" alt="Product Image">
+                        </a>
+                    </div>
+                    <div class="product-content">
+                        <!-- Tên sản phẩm -->
+                        <h4 class="title">
+                            <a href="shop-single.html?id=${product.id}">${product.name}</a>
+                        </h4>
+
+                        <!-- Hiển thị đánh giá -->
+                        <ul class="rating">
+                            <c:forEach var="star" begin="1" end="5">
+                                <li class="${star <= product.averageRating ? 'rating-on' : ''}">
+                                    <i class="fa fa-star-o"></i>
+                                </li>
+                            </c:forEach>
+                        </ul>
+
+                        <!-- Hiển thị giá -->
+                        <div class="price-box">
+                            <span class="current-price">${product.price} $</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </c:forEach>
+    </ul>
+</div>
 
 
 
                             <!--Sidebar Tags Start-->
-                            <div class="sidebar-tags">
-                                <h3 class="widget-title">Tags</h3>
+<!--                             <div class="sidebar-tags"> -->
+<!--                                 <h3 class="widget-title">Tags</h3> -->
 
-                                <ul class="tags-list">
-                                    <li><a href="#">black</a></li>
-                                    <li><a href="#">blue</a></li>
-                                    <li><a href="#">fiber</a></li>
-                                    <li><a href="#">gold</a></li>
-                                    <li><a href="#">gray</a></li>
-                                    <li><a href="#">green</a></li>
-                                    <li><a href="#">I</a></li>
-                                    <li><a href="#">leather</a></li>
-                                </ul>
-                            </div>
+<!--                                 <ul class="tags-list"> -->
+<!--                                     <li><a href="#">black</a></li> -->
+<!--                                     <li><a href="#">blue</a></li> -->
+<!--                                     <li><a href="#">fiber</a></li> -->
+<!--                                     <li><a href="#">gold</a></li> -->
+<!--                                     <li><a href="#">gray</a></li> -->
+<!--                                     <li><a href="#">green</a></li> -->
+<!--                                     <li><a href="#">I</a></li> -->
+<!--                                     <li><a href="#">leather</a></li> -->
+<!--                                 </ul> -->
+<!--                             </div> -->
                             <!--Sidebar Tags End-->
 
 

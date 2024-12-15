@@ -18,7 +18,21 @@ import jakarta.validation.Valid;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
+	
+	    @Query("SELECT p FROM Product p WHERE " +
+	           "(:categoryId IS NULL OR p.category.id = :categoryId) AND " +
+	           "(:colorId IS NULL OR p.color.id = :colorId) AND " +
+	           "(:recipientId IS NULL OR p.recipient.id = :recipientId)")
+	    Page<Product> filterByCriteria(
+	        @Param("categoryId") Long categoryId,
+	        @Param("colorId") Long colorId,
+	        @Param("recipientId") Long recipientId,
+	        Pageable pageable
+	    );
+	
 
+	
+	
 	@Query("SELECT p FROM Product p WHERE p.isPublished = true")
 	List<Product> findAllPublished();
 
