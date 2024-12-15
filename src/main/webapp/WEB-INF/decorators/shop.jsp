@@ -44,7 +44,39 @@
 <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
 <link rel="stylesheet" href="assets/css/plugins-min/plugins.min.css">
 <link rel="stylesheet" href="assets/css/style.min.css">
+<style>
 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 2000px; /* Để mô phỏng một trang dài */
+        }
+
+        .sticky-button {
+            position: fixed; /* Cố định vị trí nút */
+            bottom: 20px; /* Cách đáy trang 20px */
+            right: 20px; /* Cách phải 20px */
+            background-color: #28a745; /* Màu nền nút */
+            color: white; /* Màu chữ */
+            text-decoration: none; /* Loại bỏ gạch chân */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .sticky-button:hover {
+            background-color: #218838; /* Đổi màu khi hover */
+            transform: scale(1.1); /* Phóng to nhẹ khi hover */
+        }
+    
+</style>
 <style>
 .header-search form {
     display: flex; /* Đưa input và button vào một hàng ngang */
@@ -195,6 +227,49 @@
 
 <script>
 
+$(document).ready(function () {
+    $('.add-to-compare-btn').click(function (e) {
+        e.preventDefault(); // Ngăn chặn reload trang
+        
+        let productId = $(this).data('product-id'); // Lấy productID
+        
+        $.ajax({
+            url: "/buyer/product-compare/addCompareItem", // URL gọi API
+            method: "GET",
+            data: { productID: productId },
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị toast notification
+                    showToast("Thêm sản phẩm vào danh sách so sánh thành công!");
+                } else {
+                    // Hiển thị thông báo lỗi
+                    showToast("Thêm sản phẩm vào danh sách so sánh thành công!");
+                }
+            },
+            error: function () {
+                // Hiển thị lỗi hệ thống
+                showToast("Có lỗi xảy ra khi thêm sản phẩm vào danh sách so sánh!", "error");
+            }
+        });
+    });
+    
+    // Hàm hiển thị Toast Notification
+    function showToast(message, type = "success") {
+        let toast = $('#toast-notification');
+        toast.text(message); // Cập nhật nội dung thông báo
+
+        if (type === "error") {
+            toast.css("background-color", "#f44336"); // Màu đỏ cho lỗi
+        } else {
+            toast.css("background-color", "#4CAF50"); // Màu xanh cho thành công
+        }
+
+        toast.fadeIn(); // Hiển thị thông báo
+        setTimeout(() => {
+            toast.fadeOut(); // Tự động ẩn sau 2.5 giây
+        }, 2500);
+    }
+});
 
 
 </script>
@@ -295,8 +370,56 @@ $(document).ready(function () {
         }, 2500);
     }
 });
+
 </script>
 
+<script>
+$(document).ready(function () {
+    $('.add-to-cart-btn-product-compare').click(function (e) {
+        e.preventDefault(); // Ngăn chặn reload trang
+        
+        let productId = $(this).data('product-id'); // Lấy productID
+        
+        $.ajax({
+            url: "/buyer/cart/addCartItem",
+            method: "GET",
+            data: { productID: productId },
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị toast notification
+                    showToast("Thêm sản phẩm vào giỏ hàng thành công!");
+                } else {
+                    // Hiển thị lỗi (tùy chọn)
+                    showToast("Thêm sản phẩm vào giỏ hàng thành công!");
+                }
+            },
+            error: function () {
+                // Hiển thị lỗi hệ thống
+                showToast("Có lỗi xảy ra khi thêm sản phẩm!", "error");
+            }
+        });
+    });
+    
+    // Hàm hiển thị Toast Notification
+    function showToast(message, type = "success") {
+        let toast = $('#toast-notification');
+        toast.text(message); // Cập nhật nội dung thông báo
+
+        if (type === "error") {
+            toast.css("background-color", "#f44336"); // Màu đỏ cho lỗi
+        } else {
+            toast.css("background-color", "#4CAF50"); // Màu xanh cho thành công
+        }
+
+        toast.fadeIn(); // Hiển thị thông báo
+        setTimeout(() => {
+            toast.fadeOut(); // Tự động ẩn sau 2.5 giây
+        }, 2500);
+    }
+});
+
+
+</script>
 
 <script>
     $(document).ready(function () {

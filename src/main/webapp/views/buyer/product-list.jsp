@@ -51,7 +51,16 @@
 <!--                                         <option value="created-descending">Date, new to old</option> -->
 <!--                                         <option value="created-ascending">Date, old to new</option> -->
 <!--                                     </select> -->
-<!--                                 </div> -->
+<!--                                 </div> --> <a href="${pageContext.request.contextPath}/buyer/product-compare" class="sticky-button">
+
+<i class="icon-shopping-bag">
+</i>   Compare List
+
+</a>
+												
+                                           
+ 
+
 <div class="header-search">
                                     <form action="#">
                                         <input type="text" placeholder="Search our store ">
@@ -100,7 +109,21 @@
     </a>
 </li>
                        
-                        <li><a href="compare.html" data-bs-tooltip="tooltip" data-bs-placement="left" title="Compare"><i class="icon-sliders"></i></a></li>
+                        <li>
+                        
+                   
+                        <a href="javascript:void(0);" 
+   data-product-id="${product.id}" 
+   class="add-to-compare-btn" 
+   data-bs-tooltip="tooltip" 
+   data-bs-placement="left" 
+   title="Add to Compare">
+   <i class="icon-sliders"></i> 
+</a>
+                        
+                        
+                        
+                        </li>
                         <li><a href="wishlist.html" data-bs-tooltip="tooltip" data-bs-placement="left" title="Add to Wishlist"><i class="icon-heart"></i></a></li>
                         <li><a href="javascript:void(0);" data-bs-tooltip="tooltip" data-bs-placement="left" title="Quick View" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon-eye"></i></a></li>
                     </ul>
