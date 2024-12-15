@@ -100,7 +100,7 @@
             </div>
             <div class="product-content text-center">
                 <div class="rating">
-                    <div class="rating-on" style="width: 80%;"></div>
+                    <div class="rating-on" style="width: ${product.averageRating * 20}%;"></div>
                 </div>
                 <h4 class="product-name"><a href="shop-single.html">${product.name}</a></h4>
                 <div class="price-box">

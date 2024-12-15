@@ -73,7 +73,9 @@ public class BuyerProductController {
 		Pageable latestProductpageable = PageRequest.of(0, 3); // Lấy 3 sản phẩm đầu tiên
 		List<Product> latestProducts = productService.findTopByOrderByCreatedDateDesc(latestProductpageable);
 		model.addAttribute("latestProducts", latestProducts);
-
+		
+		
+		
 		return "buyer/product-list"; // Trang hiển thị danh sách sản phẩm
 	}
 

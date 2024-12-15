@@ -73,8 +73,17 @@ public class Product {
 	@ManyToOne
 	@JoinColumn(name = "admin_id")
 	private Admin admin;
-
-	
+	@Transient
+	private double averageRating;
+	public double getAverageRating() {
+        if (reviews != null && !reviews.isEmpty()) {
+            return reviews.stream()
+                          .mapToInt(ProductReview::getRating)
+                          .average()
+                          .orElse(0.0);
+        }
+        return 0.0;
+    }
 	@Override
 	public String toString() {
 		return "Product []";

@@ -27,7 +27,7 @@
 <!--                                 </li> -->
                                
                                 <li>
-                                    <a href="#" id="logoutLink"><i class="fa fa-sign-out"></i> Logout</a> 
+                                    <a href="#" id="logoutLink2"><i class="fa fa-sign-out"></i> Logout</a> 
                                 </li>
                                 
                             </ul>
@@ -44,7 +44,7 @@
 <!--                                     <p class="mt-25">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p> -->
 <!--                                 </div> -->
 <!--                             </div> -->
-                            <div class="tab-pane fade" id="pills-order">
+                            <div class="tab-pane fade active" id="pills-order">
                                 <div class="my-account-order account-wrapper">
                                     <h4 class="account-title">Orders</h4>
                                     <div class="account-table text-center mt-30 table-responsive">
@@ -78,12 +78,12 @@
                     </c:forEach>
                 </tbody>
                                         </table>
-                                        <div>
-                                         <a class="btn btn-primary"  href="${pageContext.request.contextPath}/buyer/address/" style="margin-left:25px; width:300px;">
-                                    <i class="fa fa-plus"></i> Add Address
-                                </a>
+<!--                                         <div> -->
+<%--                                          <a class="btn btn-primary"  href="${pageContext.request.contextPath}/buyer/address/" style="margin-left:25px; width:300px;"> --%>
+<!--                                     <i class="fa fa-plus"></i> Add Address -->
+<!--                                 </a> -->
                                 
-                                </div>
+<!--                                 </div> -->
                                          
                                     </div>
                                 </div>
@@ -258,4 +258,28 @@
                 </div>
             </div>
         </div>
+        <script>
+        document.getElementById("logoutLink2").addEventListener("click", async function (e) {
+            e.preventDefault(); // Ngăn chặn hành động mặc định của liên kết
+
+            try {
+                const response = await fetch(`${pageContext.request.contextPath}/auth/logout`, {
+                    method: 'POST',
+                    credentials: 'include', // Gửi cookie JWT kèm theo request
+                });
+
+                if (response.ok) {
+                    // Xóa JWT token khỏi trình duyệt (nếu cần)
+                    document.cookie = "jwtToken=; path=/; max-age=0";
+
+                    // Chuyển hướng về trang đăng nhập
+                    window.location.href = `${pageContext.request.contextPath}/login`;
+                } else {
+                    alert("Logout failed!");
+                }
+            } catch (error) {
+                console.error("Error during logout:", error);
+                alert("An error occurred during logout. Please try again.");
+            }
+        });</script>
         <!--My Account End-->
