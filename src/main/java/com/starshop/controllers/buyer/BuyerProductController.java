@@ -65,7 +65,7 @@ public class BuyerProductController {
 		    
 		    
 		Page<Product> productPage = productService
-				.findAll(PageRequest.of(page, size));
+				.findAll(PageRequest.of(page, 9));
 		addPaginationAttributes(model, pageable, productPage);
 		setProductImageUrls(productPage);
 		model.addAttribute("productPage", productPage);

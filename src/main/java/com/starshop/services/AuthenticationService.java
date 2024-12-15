@@ -43,6 +43,7 @@ public class AuthenticationService {
 	public User authenticate(LoginUserModel input) {
 		authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(input.getEmail(), input.getPassword()));
+		
 		return userRepository.findByEmail(input.getEmail()).orElseThrow();
 	}
 }

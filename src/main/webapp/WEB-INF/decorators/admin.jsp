@@ -10,6 +10,44 @@
 
 <!-- Mirrored from themesflat.co/html/remos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Nov 2024 14:31:56 GMT -->
 <head>
+<style>
+.product-item {
+    display: flex;
+    justify-content: space-between;  /* Căn đều các cột */
+    align-items: center;  /* Căn giữa theo chiều dọc */
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-item .flex-grow {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.product-item .name {
+    width: 20%;  /* Đặt chiều rộng cho từng cột */
+}
+
+.product-item .body-text {
+    width: 15%;  /* Đặt chiều rộng cho từng cột */
+    text-align: center;  /* Căn giữa văn bản */
+}
+
+.product-item select {
+    width: 80%;  /* Chiều rộng cho dropdown */
+    padding: 5px;
+}
+
+.product-item .list-icon-function {
+    display: flex;
+    gap: 10px;
+}
+
+.product-item .item {
+    cursor: pointer;
+}
+</style>
     <!-- Basic Page Needs -->
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->

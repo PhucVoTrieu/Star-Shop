@@ -60,7 +60,7 @@ public class User implements UserDetails {
 	 	@Override
 	    public Collection<? extends GrantedAuthority> getAuthorities() {
 	 		String role = getRole(); // Lấy role từ phương thức getRole()
-	 	    return List.of(new SimpleGrantedAuthority("SCOPE_" + role));
+	 	    return List.of(new SimpleGrantedAuthority("ROLE_" + role));
 	    }
 
 	    @Override

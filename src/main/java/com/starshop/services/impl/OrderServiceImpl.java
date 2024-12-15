@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.starshop.entities.Buyer;
@@ -28,7 +30,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Autowired
     private OrderRepository orderRepository;
-
+    
     @Override
 	public boolean hasBuyerPurchasedProduct(Buyer buyer, Long productId) {
         List<Order> orders = orderRepository.findByBuyer(buyer);
@@ -45,6 +47,11 @@ public class OrderServiceImpl implements OrderService{
     }
 
 	@Override
+	public Page<Order> findAll(Pageable pageable) {
+		return orderRepository.findAll(pageable);
+	}
+
+	@Override
 	public List<Order> findAll() {
 		return orderRepository.findAll();
 	}
@@ -59,6 +66,15 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public Optional<Order> findById(Long id) {
 		return orderRepository.findById(id);
+	}
+
+	@Override
+	public void updateStatus(Long orderId, String newStatus) {
+		 Order order = orderRepository.findById(orderId)
+                 .orElseThrow(() -> new RuntimeException("Order not found"));
+		 	order.setStatus(newStatus);
+		 	orderRepository.save(order);
+		
 	}
 
     

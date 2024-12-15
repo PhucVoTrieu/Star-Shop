@@ -23,7 +23,7 @@
                                     <li class="menu-item has-children">
                                         <a href="${pageContext.request.contextPath}/admin/products" class="menu-item-button">
                                             <div class="icon"><i class="icon-shopping-cart"></i></div>
-                                            <div class="text">Product Management</div>
+                                            <div class="text">Product</div>
                                         </a>
                                     </li>
                                     <li class="menu-item has-children">
@@ -46,27 +46,11 @@
                                     </li>
                                     
                                     <li class="menu-item has-children">
-                                        <a href="javascript:void(0);" class="menu-item-button">
+                                        <a href="${pageContext.request.contextPath}/admin/orders" class="menu-item-button">
                                             <div class="icon"><i class="icon-file-plus"></i></div>
                                             <div class="text">Order</div>
                                         </a>
-                                        <ul class="sub-menu">
-                                            <li class="sub-menu-item">
-                                                <a href="oder-list.html" class="">
-                                                    <div class="text">Order list</div>
-                                                </a>
-                                            </li>
-                                            <li class="sub-menu-item">
-                                                <a href="oder-detail.html" class="">
-                                                    <div class="text">Order detail</div>
-                                                </a>
-                                            </li>
-                                            <li class="sub-menu-item">
-                                                <a href="oder-tracking.html" class="">
-                                                    <div class="text">Order tracking</div>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                       
                                     </li>
                                     <li class="menu-item has-children">
                                         <a href="javascript:void(0);" class="menu-item-button">

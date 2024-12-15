@@ -203,23 +203,5 @@ public class AdminProductController {
 
 	
 
-	// phân trang
-	private void addPaginationAttributes(ModelMap model, Pageable pageable, Page<Product> productPage) {
-		int currentPage = pageable.getPageNumber();
-		int totalPages = productPage.getTotalPages();
-		if (totalPages > 0) {
-			int start = Math.max(1, currentPage - 2);
-			int end = Math.min(currentPage + 2, totalPages);
-			List<Integer> pageNumbers = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
-			model.addAttribute("pageNumbers", pageNumbers);
-		}
-	}
-
-	// Lấy URL tạo ra từ Cloudinary
-	private void setProductImageUrls(Page<Product> productPage) {
-		productPage.forEach(product -> {
-			String imageUrl = cloudinary.url().publicId(product.getImageUrl()).generate();
-			product.setImageUrl(imageUrl);
-		});
-	}
+	
 }
