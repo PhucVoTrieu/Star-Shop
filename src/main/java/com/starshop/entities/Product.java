@@ -2,9 +2,12 @@ package com.starshop.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -66,6 +69,13 @@ public class Product {
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<Favorite> favorites; // Sản phẩm yêu thích
+
+	@Override
+	public String toString() {
+		return "Product []";
+	}
+
+	
 	
 	
 }

@@ -18,6 +18,7 @@ import com.starshop.model.LoginUserModel;
 import com.starshop.model.RegisterUserModel;
 import com.starshop.services.AuthenticationService;
 import com.starshop.services.BuyerService;
+import com.starshop.services.CartService;
 import com.starshop.services.JwtService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,6 +31,8 @@ public class AuthenticationController {
 	private final AuthenticationService authenticationService;
 	@Autowired
 	private  BuyerService buyerService;
+	@Autowired
+	private  CartService cartService;
 
 	public AuthenticationController(JwtService jwtService, AuthenticationService authenticationService) {
 		this.jwtService = jwtService;
@@ -49,15 +52,15 @@ public class AuthenticationController {
 		User authenticatedUser = authenticationService.authenticate(loginUser);
 		String jwtToken = jwtService.generateToken(authenticatedUser);
 		Buyer buyer = buyerService.findBuyerByEmail(authenticatedUser.getEmail());
-		
-		
-		
+			
 		HttpHeaders headers = new HttpHeaders();
-		
-		
 		
 		if(buyer != null)
 		{
+			if(buyer.getShoppingCart()==null) {
+				cartService.getOrCreateCart(buyer);
+			}
+			
 			ResponseCookie userInfoCookie = ResponseCookie.from("cartID", buyer.getShoppingCart().getCartId().toString())
 		            .maxAge(3600)     // Cookie tồn tại 1 giờ
 		            .path("/")        // Áp dụng cho toàn bộ ứng dụng
@@ -101,5 +104,5 @@ public class AuthenticationController {
 	    headers.add(HttpHeaders.SET_COOKIE, cartIDCookie.toString());
 	    return ResponseEntity.noContent().headers(headers).build();
 	}
-
+	
 }

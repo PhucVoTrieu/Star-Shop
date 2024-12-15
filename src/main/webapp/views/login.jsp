@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="single-form">
                                         <label>You don't have account ?</label>
-                                        <a href="register.html" class="btn btn-dark btn-block">Create Account Now</a>
+                                        <a href="${pageContext.request.contextPath}/register" class="btn btn-dark btn-block">Create Account Now</a>
                                     </div>
                                 </form>
                             </div>

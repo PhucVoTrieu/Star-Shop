@@ -69,7 +69,7 @@
     <div class="col-lg-4 col-sm-6">
         <div class="single-product">
             <div class="product-image">
-                <a href="shop-single.html">
+              <a href="${pageContext.request.contextPath}/buyer/products/productDetail?productId=${product.id}" >
                     <img src="${product.imageUrl}" alt="${product.name}">
                 </a>
 

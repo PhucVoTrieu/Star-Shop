@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.nimbusds.oauth2.sdk.http.HTTPRequest;
 import com.starshop.entities.Address;
 import com.starshop.entities.Buyer;
+import com.starshop.entities.Order;
 import com.starshop.entities.Product;
 import com.starshop.services.AddressService;
 import com.starshop.services.BuyerService;
@@ -56,10 +57,12 @@ public class BuyerAccountController {
 		        Buyer currentBuyer = buyerService.findBuyerByEmail(email);
 		        
 		        List<Address> shippingAddress = currentBuyer.getAddresses();
-		        
+		        List<Order> orders = currentBuyer.getOrders();
 		        model.addAttribute("shippingAddress", shippingAddress);
 		        model.addAttribute("addressQuantity", shippingAddress.size());
-		        // Gắn thông tin người dùng vào model
+		        
+		        model.addAttribute("orderList", orders);
+
 		        model.addAttribute("buyerID", currentBuyer.getId());
 		   } 
 		 

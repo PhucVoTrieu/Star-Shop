@@ -1,118 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<div class="container">
-    <div class="col-md-9 col-sm-9">
-        <h1>Register</h1>
-        <div class="content-form-page">
-            <div class="row">
-                <div class="col-md-7 col-sm-7">
-                    <form id="registerForm" class="form-horizontal" role="form">
-                        <fieldset>
-                            <legend>Your personal details</legend>
-                            <div class="form-group">
-                                <label for="firstname" class="col-lg-4 control-label">First Name <span class="require">*</span></label>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your first name" required>
-                                </div>
+
+
+<!-- Register Start -->
+<div class="register-page section-padding-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="login-register-content">
+                    <h4 class="title">Create New Account</h4>
+                    <div class="login-register-form">
+                        <form id="registerForm">
+                            <!-- Full Name -->
+                            <div class="single-form">
+                                <label>Full Name *</label>
+                                <input type="text" id="fullName" placeholder="Enter your full name" required>
                             </div>
-                            <div class="form-group">
-                                <label for="lastname" class="col-lg-4 control-label">Last Name <span class="require">*</span></label>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your last name" required>
-                                </div>
+                            <!-- Phone Number -->
+                            <div class="single-form">
+                                <label>Phone Number *</label>
+                                <input type="tel" id="phoneNumber" placeholder="Enter your phone number" required>
                             </div>
-                            <div class="form-group">
-                                <label for="email" class="col-lg-4 control-label">Email <span class="require">*</span></label>
-                                <div class="col-lg-8">
-                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-                                </div>
+                            <!-- Email -->
+                            <div class="single-form">
+                                <label>Username or Email Address *</label>
+                                <input type="email" id="email" placeholder="Enter your email" required>
                             </div>
-                            <div class="form-group">
-                                <label for="phone" class="col-lg-4 control-label">Phone Number <span class="require">*</span></label>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
-                                </div>
+                            <!-- Password -->
+                            <div class="single-form">
+                                <label>Password *</label>
+                                <input type="password" id="password" placeholder="Enter your password" required>
                             </div>
-                            <div class="form-group">
-                                <label for="address" class="col-lg-4 control-label">Address <span class="require">*</span></label>
-                                <div class="col-lg-8">
-                                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter your address" required>
-                                </div>
+                            <!-- Confirm Password -->
+                            <div class="single-form">
+                                <label>Confirm Password *</label>
+                                <input type="password" id="confirmPassword" placeholder="Re-enter your password" required>
                             </div>
-                        </fieldset>
-                        <fieldset>
-                            <legend>Your password</legend>
-                            <div class="form-group">
-                                <label for="password" class="col-lg-4 control-label">Password <span class="require">*</span></label>
-                                <div class="col-lg-8">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
-                                </div>
+                            <!-- Register Button -->
+                            <div class="single-form">
+                                <button type="submit" class="btn btn-primary btn-block">Register</button>
                             </div>
-                            <div class="form-group">
-                                <label for="confirm-password" class="col-lg-4 control-label">Confirm password <span class="require">*</span></label>
-                                <div class="col-lg-8">
-                                    <input type="password" class="form-control" id="confirm-password" name="confirm_password" placeholder="Re-enter your password" required>
-                                </div>
+                            <div class="single-form">
+                                <label>Already have an account?</label>
+                                <a href="${pageContext.request.contextPath}/login" class="btn btn-dark btn-block">Log in instead!</a>
                             </div>
-                        </fieldset>
-                        <div class="row">
-                            <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                                <button type="submit" class="btn btn-primary">Create an account</button>
-                                <button type="reset" class="btn btn-default">Cancel</button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- Register End -->
 <script>
     document.getElementById('registerForm').addEventListener('submit', function (event) {
         event.preventDefault(); // Ngăn form gửi thông thường
 
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-        const firstName = document.getElementById('firstname').value;
-        const lastName = document.getElementById('lastname').value;
-        const phone = document.getElementById('phone').value;
-        const address = document.getElementById('address').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const fullName = document.getElementById('fullName').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
 
         // Kiểm tra mật khẩu trùng khớp
         if (password !== confirmPassword) {
-            alert('Mật khẩu không trùng khớp!');
+            alert('Passwords do not match!');
             return;
         }
-        else {
 
-            fetch('/users/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({email, password, phone, firstName, lastName, address}),
+        // Gửi dữ liệu đăng ký
+        fetch('/auth/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password, fullName, phoneNumber }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                
+                    window.location.href = "/login"; // Điều hướng đến trang đăng nhập
+               
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.code == 1000) {
-                        const token = data.result.token;
-                        localStorage.setItem('authToken', token); // Lưu token vào localStorage
-                        alert('Đăng kí thành công!');
-                        window.location.href = "/login"; // Điều hướng đến trang hồ sơ
-                    } else {
-                        alert('Đăng kí thất bại: ' + (data.message || 'Unknown error'));
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred while registering.');
-                });
-        }
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred during registration.');
+            });
     });
 </script>
-</body>
-
-</html>

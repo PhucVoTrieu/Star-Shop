@@ -33,7 +33,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Buyer extends User{
 
-    /**
+  
+
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -56,4 +58,9 @@ public class Buyer extends User{
     public String getRole() {
         return Role.BUYER.name();
     }
+
+	@Override
+	public String toString() {
+		return "Buyer []";
+	}
 }

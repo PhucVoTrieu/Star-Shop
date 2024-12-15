@@ -48,6 +48,7 @@ public class CartServiceImpl implements CartService {
 			// Tạo giỏ hàng mới nếu chưa có
 			ShoppingCart newCart = new ShoppingCart();
 			newCart.setBuyer(buyer);
+			buyer.setShoppingCart(newCart);
 			return cartRepository.save(newCart);
 		});
 	}

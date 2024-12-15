@@ -176,8 +176,65 @@
 	<!-- Main JS -->
 	<script src="assets/js/main.js"></script>
 
-
 <script>
+
+
+
+</script>
+<script>
+$(document).ready(function () {
+    $('.add-to-cart-btn-product-detail').click(function (e) {
+        e.preventDefault(); // Ngăn chặn reload trang
+        
+        let productId = $(this).data('product-id'); // Lấy productID
+        let quantity = $(this).closest('.product-action').siblings('.product-quantity').find('.quantity-input').val(); // Lấy quantity
+
+        $.ajax({
+            url: "/buyer/cart/addMultiCartItem", // Đường dẫn đúng
+            method: "GET",
+            data: { 
+                productID: productId, 
+                productQuantity: quantity // Gửi quantity
+            },
+            success: function (response) {
+                if (response.success) {
+                    // Hiển thị toast notification
+                    alert("thanh cong");
+                    console.log("Event triggered for .add-to-cart-btn-product-detail");
+                    showToast("Thêm sản phẩm vào giỏ hàng thành công!");
+                } else {
+                    // Hiển thị lỗi (tùy chọn)
+                	showToast("Thêm sản phẩm vào giỏ hàng thành công!");
+                }
+            },
+            error: function () {
+                // Hiển thị lỗi hệ thống
+                   alert("thanh cong");
+                   console.log("Event triggered for .add-to-cart-btn-product-detail");
+                showToast("Có lỗi xảy ra khi thêm sản phẩm!", "error");
+            }
+        });
+    });
+    function showToast(message, type = "success") {
+        let toast = $('#toast-notification');
+        toast.text(message); // Cập nhật nội dung thông báo
+
+        if (type === "error") {
+            toast.css("background-color", "#f44336"); // Màu đỏ cho lỗi
+        } else {
+            toast.css("background-color", "#4CAF50"); // Màu xanh cho thành công
+        }
+
+        toast.fadeIn(); // Hiển thị thông báo
+        setTimeout(() => {
+            toast.fadeOut(); // Tự động ẩn sau 2.5 giây
+        }, 2500);
+    }
+});
+
+
+
+
 $(document).ready(function () {
     $('.add-to-cart-btn').click(function (e) {
         e.preventDefault(); // Ngăn chặn reload trang

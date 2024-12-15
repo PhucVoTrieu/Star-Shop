@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.starshop.entities.Buyer;
+import com.starshop.entities.ShoppingCart;
 import com.starshop.entities.User;
 import com.starshop.model.LoginUserModel;
 import com.starshop.model.RegisterUserModel;
@@ -33,6 +34,9 @@ public class AuthenticationService {
 		buyer.setFullName(input.getFullName());
 		buyer.setEmail(input.getEmail());
 		buyer.setPassword(passwordEncoder.encode(input.getPassword()));
+		buyer.setPhoneNumber(input.getPhoneNumber());
+//		ShoppingCart cart = new ShoppingCart();
+//		buyer.setShoppingCart(cart);
 		return buyerRepository.save(buyer);
 	}
 

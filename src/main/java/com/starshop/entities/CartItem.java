@@ -26,9 +26,9 @@ public class CartItem {
 	private Long id;
 
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "product_id")
-	private Product product;
+	@ManyToOne(fetch = FetchType.EAGER) // Một sản phẩm có thể thuộc nhiều CartItem
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
 	private int quantity;
 	

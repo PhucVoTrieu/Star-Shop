@@ -43,30 +43,16 @@ public class BuyerOrderController {
     @Autowired
    	CartService cartService;
 	@PostMapping("placeOrder")
-	public String index(HttpServletRequest request, Model model, @RequestParam Long cartID, @RequestParam int buyerID , @RequestParam double totalPrice ){
+	public String index(HttpServletRequest request, Model model, @RequestParam Long cartID,
+			@RequestParam int buyerID , 
+			@RequestParam double totalPrice , 
+			@RequestParam String shippingAddress,
+			@RequestParam("orderNote") String orderNote
+			){
 		 try {
-	            // Chuyển đổi JSON thành List
-//	            ObjectMapper objectMapper = new ObjectMapper();
-//	            List<CartItem> cartItemList = objectMapper.readValue(orderItemListJson, new TypeReference<List<CartItem>>() {});
-//	            
-//	          
-//	            
-//	            
-//	            
-//	            for (CartItem cartItem : cartItemList) {
-//	                OrderItem orderItem = new OrderItem();
-//
-//	                // Gán giá trị từ CartItem sang OrderItem
-//	                orderItem.setCartItem(cartItem); // Liên kết với CartItem
-//	                orderItem.setOrder(order); // Gán đối tượng Order liên quan
-//	                orderItem.setQuantity(cartItem.getQuantity()); // Gán số lượng
-//	                orderItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity()); // Tính tổng giá
-//	                
-//	                // Thêm vào danh sách OrderItem
-//	                orderItemList.add(orderItem);
-//	            }
 			
-			 	Order order = new Order();
+			 Order order = new Order();
+			 
 			 ShoppingCart cart = cartService.findByCartId(cartID).orElseThrow(()->new RuntimeException("Cart Not Found"));
 		     List<CartItem> cartItemList = cart.getCartItems();
 		     
@@ -76,7 +62,7 @@ public class BuyerOrderController {
 	                OrderItem orderItem = new OrderItem();
 
 	                // Gán giá trị từ CartItem sang OrderItem
-	                orderItem.setCartItem(cartItem); // Liên kết với CartItem
+	                orderItem.setProduct(cartItem.getProduct()); // Liên kết với CartItem
 	                orderItem.setOrder(order); // Gán đối tượng Order liên quan
 	                orderItem.setQuantity(cartItem.getQuantity()); // Gán số lượng
 	                orderItem.setPrice(cartItem.getProduct().getPrice() * cartItem.getQuantity()); // Tính tổng giá
@@ -90,6 +76,8 @@ public class BuyerOrderController {
 	            order.setOrderItems(orderItemList);
 	            order.setStatus("Pending");
 	            order.setTotalPrice(totalPrice);
+	            order.setShippingAddress(shippingAddress);
+	            order.setOrderNote(orderNote);
 	            orderService.save(order);
 	            
 
@@ -99,17 +87,20 @@ public class BuyerOrderController {
 	            e.printStackTrace();
 	            return "error";
 	        }
-        
-            
+
 		 return "redirect:/common/products";
         // Chuyển hướng về trang chủ
         
     }
+	@GetMapping("orderDetail")
+	public String getOrderDetail(HttpServletRequest request, Model model, @RequestParam Long orderID) {
+		Order order = orderService.findById(orderID).orElseThrow(()->new RuntimeException("Order Not Found"));
+		List<OrderItem>orderItemList = order.getOrderItems();
+		model.addAttribute("order",order);
+		model.addAttribute("orderItemList",orderItemList);
+		
+		return "buyer/order-detail";
+	}
 	
-	
-    
-    // Hiển thị danh sách/lịch sử đơn hàng (gộp 2 phương thức getPurchaseHistory và getMyOrders)
-   
-
 	
 }

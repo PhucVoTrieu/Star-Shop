@@ -20,18 +20,23 @@ public class ProductReviewServiceImpl implements ProductReviewService {
 	@Autowired
 	ProductReviewRepository reviewRepo;
 	
-	@Override
-	public void delete(ProductReview entity) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	
 	
 	@Override
-	public Optional<ProductReview> findById(Long id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+	public boolean existsByBuyerIdAndProductId(int buyerId, Long productId) {
+		return reviewRepo.existsByBuyerIdAndProductId(buyerId, productId);
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		reviewRepo.deleteById(id);
+	}
+
+	@Override
+	public Optional<ProductReview> findById(int id) {
+		return reviewRepo.findById(id);
 	}
 
 	@Override

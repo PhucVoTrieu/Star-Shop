@@ -37,31 +37,31 @@
     <div class="col-sm-6">
         <div class="single-form">
             <label>Province *</label>
-            <input type="text" id="province" readonly>
+            <input type="text" id="province"  required>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="single-form">
             <label>District *</label>
-            <input type="text" id="district" readonly>
+            <input type="text" id="district"  required>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="single-form">
             <label>Commune *</label>
-            <input type="text" id="commune" readonly>
+            <input type="text" id="commune" >
         </div>
     </div>
     <div class="col-sm-6">
         <div class="single-form">
             <label>Street Number *</label>
-            <input type="text" id="streetNumber" readonly>
+            <input type="text" id="streetNumber" >
         </div>
     </div>
     <div class="col-sm-12">
         <div class="single-form">
             <label>Street Name *</label>
-            <input type="text" id="streetName" readonly>
+            <input type="text" id="streetName" >
         </div>
     </div>
 </div>
@@ -69,10 +69,12 @@
 
                               
 
-                                <div class="single-form checkout-note">
-                                    <label>Order notes</label>
-                                    <textarea placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
-                                </div>
+                              
+                                
+                                
+                                 <div class="checkout-btn" >
+                                        <button class="btn btn-primary btn-block" type="submit" style="margin-top:30px;">Save Address</button>
+                                    </div>
                             </div>
                         </div>
                         
@@ -113,10 +115,10 @@
     <tfoot>
     
      <tr>
-            <td class="Product-name"><p id="selectedAddress">Selected Address: None</p></td>
+            <td class="Product-name Product-quantity" colspan="3"> <p id="selectedAddress" >Selected Address: None</p></td>
             <td>
           <input type="hidden" value=${cartID } name="cartID">
-
+			<input type="hidden" id="shippingAddress" name="shippingAddress">
             <input type="hidden" name="buyerID" value="${buyerID}">
       
             </td>
@@ -147,6 +149,13 @@
                 <p>£<c:set var="total" value="${subtotal}" />${total}</p>
             </td>
               <td>    <input type="hidden" name="totalPrice" value="${subtotal}"> </td>
+        </tr>
+        <tr>
+         <td colspan="3"><div class="single-form checkout-note" >
+                                    <label>Order notes</label>
+                                    <textarea placeholder="Notes about your order, e.g. special notes for delivery." name="orderNote"></textarea>
+                                </div>
+                                </td>
         </tr>
     </tfoot>
 </table>
@@ -191,13 +200,28 @@
             // Hiển thị địa chỉ trong thẻ <p>
             const fullAddress ="Selected address: "+ streetNumber + " " + streetName + ", " + commune + ", " + district + ", " + province;
             document.getElementById("selectedAddress").textContent = fullAddress;
-
+			
+            document.getElementById("shippingAddress").value = streetNumber + " " + streetName + ", " + commune + ", " + district + ", " + province;
         }
 
 
 </script>
         
-       <script type="text/javascript">
-    var cartItemListJson = JSON.stringify(${cartItemList});
-    document.getElementById("orderItemList").value = cartItemListJson;
+    <script>
+    document.querySelector(".btn.btn-primary.btn-block").addEventListener("click", function(event) {
+        event.preventDefault(); // Ngăn form submit nếu chưa cần thiết
+
+        // Lấy dữ liệu từ các input
+        const province = document.getElementById("province").value || 'N/A';
+        const district = document.getElementById("district").value || 'N/A';
+        const commune = document.getElementById("commune").value || 'N/A';
+        const streetNumber = document.getElementById("streetNumber").value || 'N/A';
+        const streetName = document.getElementById("streetName").value || 'N/A';
+
+        // Format địa chỉ đầy đủ
+        const fullAddress ="Selected address: "+ streetNumber + " " + streetName + ", " + commune + ", " + district + ", " + province;
+        document.getElementById("selectedAddress").textContent = fullAddress;
+		
+        document.getElementById("shippingAddress").value = streetNumber + " " + streetName + ", " + commune + ", " + district + ", " + province;
+    });
 </script>

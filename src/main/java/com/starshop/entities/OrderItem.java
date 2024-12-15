@@ -30,9 +30,9 @@ public class OrderItem {
     private Order order;
 
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cart_item_id", nullable = false)
-    private CartItem cartItem; // Mỗi OrderItem liên kết với một CartItem
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     private int quantity;
 

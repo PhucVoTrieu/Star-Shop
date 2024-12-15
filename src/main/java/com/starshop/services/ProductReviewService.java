@@ -10,7 +10,7 @@ import com.starshop.entities.ProductReview;
 
 
 public interface ProductReviewService {
-	void delete(ProductReview entity);
+
 	
 	ProductReview addReview(int productId,int rating,String content);
 
@@ -21,7 +21,7 @@ public interface ProductReviewService {
 
 	//<S extends ProductReview> Optional<S> findOne(Example<S> example);
 
-	Optional<ProductReview> findById(Long id);
+	Optional<ProductReview> findById(int reviewId);
 
 	//List<ProductReview> findAllById(Iterable<Long> ids);
 
@@ -38,5 +38,9 @@ public interface ProductReviewService {
 	//List<ProductReview> findByCategoryNameContaining(String name);
 	
 	public Optional<ProductReview> getReviewByBuyerAndProduct(Long buyerId, Long productId);
+
+	void deleteById(Integer id);
+
+	boolean existsByBuyerIdAndProductId(int integer, Long productId);
     
 }

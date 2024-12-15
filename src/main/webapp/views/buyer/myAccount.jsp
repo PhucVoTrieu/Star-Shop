@@ -10,21 +10,21 @@
                     <div class="col-xl-3 col-md-4">
                         <div class="my-account-menu mt-30">
                             <ul class="nav account-menu-list flex-column">
-                                <li>
-                                    <a class="active" data-bs-toggle="pill" href="#pills-dashboard"><i class="fa fa-tachometer"></i> Dashboard</a>
-                                </li>
+<!--                                 <li> -->
+<!--                                     <a class="active" data-bs-toggle="pill" href="#pills-dashboard"><i class="fa fa-tachometer"></i> Dashboard</a> -->
+<!--                                 </li> -->
                                 <li>
                                     <a data-bs-toggle="pill" href="#pills-order"><i class="fa fa-shopping-cart"></i> Order</a>
                                 </li>
-                                <li>
-                                    <a data-bs-toggle="pill" href="#pills-payment"><i class="fa fa-credit-card"></i> Payment Method</a>
-                                </li>
+<!--                                 <li> -->
+<!--                                     <a data-bs-toggle="pill" href="#pills-payment"><i class="fa fa-credit-card"></i> Payment Method</a> -->
+<!--                                 </li> -->
                                 <li>
                                     <a data-bs-toggle="pill" href="#pills-address"><i class="fa fa-map-marker"></i> Address</a>
                                 </li>
-                                <li>
-                                    <a data-bs-toggle="pill" href="#pills-account"><i class="fa fa-user"></i> Account Details</a>
-                                </li>
+<!--                                 <li> -->
+<!--                                     <a data-bs-toggle="pill" href="#pills-account"><i class="fa fa-user"></i> Account Details</a> -->
+<!--                                 </li> -->
                                
                                 <li>
                                     <a href="#" id="logoutLink"><i class="fa fa-sign-out"></i> Logout</a> 
@@ -35,68 +35,67 @@
                     </div>
                     <div class="col-xl-8 col-md-8">
                         <div class="tab-content my-account-tab mt-30" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="pills-dashboard">
-                                <div class="my-account-dashboard account-wrapper">
-                                    <h4 class="account-title">Dashboard</h4>
-                                    <div class="welcome-dashboard">
-                                        <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong> <a href="login.html">Logout</a> )</p>
-                                    </div>
-                                    <p class="mt-25">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p>
-                                </div>
-                            </div>
+<!--                             <div class="tab-pane fade show active" id="pills-dashboard"> -->
+<!--                                 <div class="my-account-dashboard account-wrapper"> -->
+<!--                                     <h4 class="account-title">Dashboard</h4> -->
+<!--                                     <div class="welcome-dashboard"> -->
+<!--                                         <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong> <a href="login.html">Logout</a> )</p> -->
+<!--                                     </div> -->
+<!--                                     <p class="mt-25">From your account dashboard. you can easily check & view your recent orders, manage your shipping and billing addresses and edit your password and account details.</p> -->
+<!--                                 </div> -->
+<!--                             </div> -->
                             <div class="tab-pane fade" id="pills-order">
                                 <div class="my-account-order account-wrapper">
                                     <h4 class="account-title">Orders</h4>
                                     <div class="account-table text-center mt-30 table-responsive">
                                         <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th class="no">No</th>
-                                                    <th class="name">Name</th>
-                                                    <th class="date">Date</th>
-                                                    <th class="status">Status</th>
-                                                    <th class="total">Total</th>
-                                                    <th class="action">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Mostarizing Oil</td>
-                                                    <td>Aug 22, 2022</td>
-                                                    <td>Pending</td>
-                                                    <td>$100</td>
-                                                    <td><a href="#">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Katopeno Altuni</td>
-                                                    <td>July 22, 2022</td>
-                                                    <td>Approved</td>
-                                                    <td>$45</td>
-                                                    <td><a href="#">View</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>Murikhete Paris</td>
-                                                    <td>June 22, 2022</td>
-                                                    <td>On Hold</td>
-                                                    <td>$99</td>
-                                                    <td><a href="#">View</a></td>
-                                                </tr>
-                                            </tbody>
+                                           <thead>
+                    <tr>
+                        <th class="no">No</th>
+                        <th class="date">Order Date</th>
+                        <th class="status">Status</th>
+                        <th class="total">Total Price</th>
+                        <th class="address">Shipping Address</th>
+                        <th class="note">Order Note</th>
+                        <th class="action">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="order" items="${orderList}" varStatus="status">
+                        <tr>
+                            <td>${status.index + 1}</td> <!-- Số thứ tự -->
+                            <td>${order.orderDate}</td> <!-- Ngày đặt hàng -->
+                            <td>${order.status}</td> <!-- Trạng thái -->
+                            <td>$${order.totalPrice}</td> <!-- Tổng tiền -->
+                            <td style="width:400px;">${order.shippingAddress}</td> <!-- Địa chỉ giao hàng -->
+                            <td style="width:200px;">${order.orderNote}</td> <!-- Ghi chú đơn hàng -->
+                            <td>
+                                <a href="${pageContext.request.contextPath}/buyer/orders/orderDetail?orderID=${order.orderID}">
+                                    View Details
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
                                         </table>
+                                        <div>
+                                         <a class="btn btn-primary"  href="${pageContext.request.contextPath}/buyer/address/" style="margin-left:25px; width:300px;">
+                                    <i class="fa fa-plus"></i> Add Address
+                                </a>
+                                
+                                </div>
+                                         
                                     </div>
                                 </div>
                             </div>
                           
-                            <div class="tab-pane fade" id="pills-payment">
-                                <div class="my-account-payment account-wrapper">
-                                    <h4 class="account-title">Payment Method</h4>
-                                    <p class="mt-30">You Can't Saved Your Payment Method yet.</p>
-                                </div>
+<!--                             <div class="tab-pane fade" id="pills-payment"> -->
+<!--                                 <div class="my-account-payment account-wrapper"> -->
+<!--                                     <h4 class="account-title">Payment Method</h4> -->
+<!--                                     <p class="mt-30">You Can't Saved Your Payment Method yet.</p> -->
+<!--                                 </div> -->
                                 
-                            </div>
+<!--                             </div> -->
                             
                           <div class="tab-pane fade" id="pills-address">
     <div class="my-account-address account-wrapper">

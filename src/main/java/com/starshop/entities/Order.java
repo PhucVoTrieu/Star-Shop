@@ -29,7 +29,7 @@ import java.util.List;
 @Setter
 @Table(name = "orders")
 public class Order {
-
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderID;
@@ -48,5 +48,12 @@ public class Order {
 
     private Double totalPrice;
 
+    private String shippingAddress;
     
+    private String orderNote;
+
+	@Override
+	public String toString() {
+		return "Order []";
+	}
 }

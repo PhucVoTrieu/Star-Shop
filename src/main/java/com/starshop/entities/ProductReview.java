@@ -2,6 +2,9 @@ package com.starshop.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,9 +14,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "productReviews")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class ProductReview implements Serializable{
 	/**
 	 * 
@@ -36,39 +50,14 @@ public class ProductReview implements Serializable{
 	@Column(name="reviewContent", columnDefinition="nvarchar(500)")
 	private String reviewContent;
 	@Column(name="reviewDate")
-	private LocalDate reviewDate;
-	
-	
-	public Product getProduct() {
-		return product;
-	}
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	public Buyer getBuyer() {
-		return buyer;
-	}
-	public void setBuyer(Buyer buyer) {
-		this.buyer = buyer;
-	}
-	public int getRating() {
-		return rating;
-	}
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-	public String getReviewContent() {
-		return reviewContent;
-	}
-	public void setReviewContent(String reviewContent) {
-		this.reviewContent = reviewContent;
-	}
-	public LocalDate getReviewDate() {
-		return reviewDate;
-	}
-	public void setReviewDate(LocalDate reviewDate) {
-		this.reviewDate = reviewDate;
+	private Date reviewDate;
+	@Override
+	public String toString() {
+		return "ProductReview []";
 	}
 	
+	 @Transient // Không lưu vào DB
+	   private boolean canDelete;
+
 	
 }

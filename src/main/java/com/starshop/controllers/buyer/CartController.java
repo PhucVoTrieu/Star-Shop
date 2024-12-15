@@ -135,7 +135,7 @@ public class CartController {
 	    Map<String, Object> response = new HashMap<>();
 	    Optional<Product> product = productService.findById(productId);
 	    Buyer buyer = buyerService.findById(1).orElseThrow(() -> new RuntimeException("Buyer not found"));
-
+	    
 	    if (product.isPresent()) {
 	        // Thêm sản phẩm vào giỏ hàng
 	        cartService.addCartItem(buyer, productId, 1);
@@ -148,6 +148,25 @@ public class CartController {
 	    
 	    return ResponseEntity.ok(response);
 	}
+	
+	@GetMapping("/addMultiCartItem")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> addMultiCartItem(@RequestParam("productID") Long productId, @RequestParam("productQuantity") int quantity) {
+	    Map<String, Object> response = new HashMap<>();
+	    Optional<Product> product = productService.findById(productId);
+	    Buyer buyer = buyerService.findById(1).orElseThrow(() -> new RuntimeException("Buyer not found"));
 
+	    if (product.isPresent()) {
+	        // Thêm sản phẩm vào giỏ hàng
+	        cartService.addCartItem(buyer, productId, quantity);
+
+	        response.put("cartItemCount", buyer.getShoppingCart().getCartItems().size()); // Số lượng item trong giỏ hàng
+	    } else {
+	        response.put("success", false);
+	        response.put("message", "Sản phẩm không tồn tại!");
+	    }
+	    
+	    return ResponseEntity.ok(response);
+	}
 
 }
