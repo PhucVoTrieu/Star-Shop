@@ -31,24 +31,32 @@
                         <!--Shop Top Bar Start-->
                         <div class="shop-top-bar d-sm-flex align-items-center justify-content-between">
                             <div class="top-bar-btn">
-                                <ul class="nav"">
+                                <ul class="nav">
             <li class=" nav-item"><a class="nav-link grid active" data-bs-toggle="tab" href="#grid"></a></li>
 <!--                                     <li class="nav-item"><a class="nav-link list" data-bs-toggle="tab" href="#list"></a></li> -->
                                 </ul>
+                                 
                             </div>
+                            
                             <div class="top-bar-sorter">
-                                <div class="sorter-wrapper d-flex align-items-center">
-                                    <label>Sort by:</label>
-                                    <select class="sorter wide" name="SortBy" id="SortBy">
-                                        <option value="manual">Featured</option>
-                                        <option value="best-selling">Best Selling</option>
-                                        <option value="title-ascending">Alphabetically, A-Z</option>
-                                        <option value="title-descending">Alphabetically, Z-A</option>
-                                        <option value="price-ascending">Price, low to high</option>
-                                        <option value="price-descending">Price, high to low</option>
-                                        <option value="created-descending">Date, new to old</option>
-                                        <option value="created-ascending">Date, old to new</option>
-                                    </select>
+<!--                                 <div class="sorter-wrapper d-flex align-items-center"> -->
+<!--                                     <label>Sort by:</label> -->
+<!--                                     <select class="sorter wide" name="SortBy" id="SortBy"> -->
+<!--                                         <option value="manual">Featured</option> -->
+<!--                                         <option value="best-selling">Best Selling</option> -->
+<!--                                         <option value="title-ascending">Alphabetically, A-Z</option> -->
+<!--                                         <option value="title-descending">Alphabetically, Z-A</option> -->
+<!--                                         <option value="price-ascending">Price, low to high</option> -->
+<!--                                         <option value="price-descending">Price, high to low</option> -->
+<!--                                         <option value="created-descending">Date, new to old</option> -->
+<!--                                         <option value="created-ascending">Date, old to new</option> -->
+<!--                                     </select> -->
+<!--                                 </div> -->
+<div class="header-search">
+                                    <form action="#">
+                                        <input type="text" placeholder="Search our store ">
+                                        <button><i class="icon-search"></i></button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="top-bar-page-amount">

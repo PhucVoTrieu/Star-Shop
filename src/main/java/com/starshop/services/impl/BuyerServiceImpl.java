@@ -1,5 +1,6 @@
 package com.starshop.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,11 @@ import com.starshop.services.BuyerService;
 public class BuyerServiceImpl implements BuyerService{
 	@Autowired
 	BuyerRepository buyerRepository;
+
+	@Override
+	public List<Buyer> findAll() {
+		return buyerRepository.findAll();
+	}
 
 	@Override
 	public Optional<Buyer> findById(int id) {

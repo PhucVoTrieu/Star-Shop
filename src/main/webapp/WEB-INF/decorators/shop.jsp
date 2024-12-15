@@ -45,7 +45,24 @@
 <link rel="stylesheet" href="assets/css/plugins-min/plugins.min.css">
 <link rel="stylesheet" href="assets/css/style.min.css">
 
+<style>
+.header-search form {
+    display: flex; /* Đưa input và button vào một hàng ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+}
+.header-search button {
+    background-color: #f0f0f0; /* Màu nền nút */
+    border: 1px solid #ccc; /* Viền */
+    padding: 5px 8px; /* Kích thước nút */
+    cursor: pointer; /* Biến chuột thành dạng nhấn */
+}
 
+.header-search input {
+    border: 1px solid #ccc; /* Viền cho ô input */
+    padding: 8px; /* Khoảng cách bên trong */
+    flex: 1; /* Ô input mở rộng để chiếm hết không gian trống */
+}
+</style>
 <style>
 .product-image img {
     width: 100%; /* Hoặc một giá trị cụ thể, ví dụ: 300px */

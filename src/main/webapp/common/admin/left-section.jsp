@@ -26,24 +26,7 @@
                                             <div class="text">Product</div>
                                         </a>
                                     </li>
-                                    <li class="menu-item has-children">
-                                        <a href="javascript:void(0);" class="menu-item-button">
-                                            <div class="icon"><i class="icon-layers"></i></div>
-                                            <div class="text">Category</div>
-                                        </a>
-                                        <ul class="sub-menu">
-                                            <li class="sub-menu-item">
-                                                <a href="category-list.html" class="">
-                                                    <div class="text">Category list</div>
-                                                </a>
-                                            </li>
-                                            <li class="sub-menu-item">
-                                                <a href="new-category.html" class="">
-                                                    <div class="text">New category</div>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                   
                                     
                                     <li class="menu-item has-children">
                                         <a href="${pageContext.request.contextPath}/admin/orders" class="menu-item-button">
@@ -53,32 +36,11 @@
                                        
                                     </li>
                                     <li class="menu-item has-children">
-                                        <a href="javascript:void(0);" class="menu-item-button">
+                                         <a href="${pageContext.request.contextPath}/admin/users" class="menu-item-button">
                                             <div class="icon"><i class="icon-user"></i></div>
                                             <div class="text">User</div>
                                         </a>
-                                        <ul class="sub-menu">
-                                            <li class="sub-menu-item">
-                                                <a href="all-user.html" class="">
-                                                    <div class="text">All user</div>
-                                                </a>
-                                            </li>
-                                            <li class="sub-menu-item">
-                                                <a href="add-new-user.html" class="">
-                                                    <div class="text">Add new user</div>
-                                                </a>
-                                            </li>
-                                            <li class="sub-menu-item">
-                                                <a href="login.html" class="">
-                                                    <div class="text">Login</div>
-                                                </a>
-                                            </li>
-                                            <li class="sub-menu-item">
-                                                <a href="sign-up.html" class="">
-                                                    <div class="text">Sign up</div>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                      
                                     </li>
                                     
                                    
